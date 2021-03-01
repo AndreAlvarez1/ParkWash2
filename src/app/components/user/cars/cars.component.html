@@ -1,0 +1,128 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<app-sidebar></app-sidebar>
+
+<div class="contenedor2">
+
+<div class="row cabecera shadow">
+    <div class="col-12">
+        <h1 (click)="info()"><i class="fas fa-car"></i> Mis Vehiculos</h1>
+    </div>
+</div>
+
+
+<div *ngIf="cars.length < 1" class="row text-center">
+    <div class="col-12">
+        <p>Aún no has registrado ningún vehiculo</p>
+    </div>
+</div>
+
+<div *ngIf="cars.length > 0" class="row mt-2">
+    <div class="col-10 offset-1 col-md-6 offset-md-3">
+       
+        <div *ngFor="let c of cars" class="row auto">
+           <div class="col-10">
+               <h2>{{c.modelo}}</h2>
+               <p>Marca: {{c.marca}}</p>
+               <p>color: {{c.color}}</p>
+               <p>patente: {{c.patente}}</p>
+           </div>
+           <div class="col-2">
+               <h2 (click)="editar(c)" ><i class="fas fa-pencil-alt ico"></i></h2>
+               <h2 (click)="borrar(c)" ><i class="fas fa-trash ico"></i></h2>
+           </div>
+       </div>
+    </div>
+</div>
+
+<div *ngIf="agregar" class="row text-center mt-2">
+    <div class="col-12">
+        <button class="btn btn-primary" (click)="modalVehiculo = true">Agregar un vehiculo</button>
+    </div>
+</div>
+
+<div *ngIf="!agregar" class="row text-center mt-2">
+    <div class="col-10 offset-1 col-md-6 offset-md-3">
+        <p>Para poder agregar más vehiculos te invitamos a hacer un upgrade como usuario Premium</p>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div *ngIf="modalVehiculo" class="row fondoModif animated fadeIn">
+    <div class="col-12 col-md-4 offset-md-8 animated slideInRight modalForm">
+       
+        <div class="row modalHeader">
+            <div class="col-10">
+                <h1 (click)="info()">Vehiculo</h1>
+            </div>
+            <div class="col-2">
+                <h1><i class="fas fa-times pointer" (click)="modalVehiculo = !modalVehiculo"></i></h1>
+            </div>
+        </div>
+
+        <div class="row modalBody">
+            <div class="col-12">
+                <form (ngSubmit)="guardar(form)" #form="ngForm" class="row validate-form ">
+            
+            
+                    <div class="col-12 campo">
+                        <label>Patente</label>
+                        <span *ngIf="form.submitted && form.controls['patente'].errors" class="error">Debes ingresar una patente</span>
+                        <input class="form-control" type="text" name="patente" required [(ngModel)]="car.patente" placeholder="ej: ZZYY99">
+                    </div>
+        
+                    <div class="col-12 campo">
+                        <label>Marca</label>
+                        <span *ngIf="form.submitted && form.controls['marca'].errors" class="error">Debes ingresar una marca</span>
+                        <input class="form-control" type="text" name="marca" required [(ngModel)]="car.marca" placeholder="Marca">
+                    </div>
+        
+                    <div class="col-12 campo">
+                        <label>Modelo</label>
+                        <span *ngIf="form.submitted && form.controls['modelo'].errors" class="error">Debes ingresar un modelo</span>
+                        <input class="form-control" type="text" name="modelo" required [(ngModel)]="car.modelo" placeholder="Modelo">
+                    </div>
+        
+                    <div class="col-12 campo">
+                        <label>Color</label>
+                        <span *ngIf="form.submitted && form.controls['color'].errors" class="error">Debes ingresar un Color</span>
+                        <input class="form-control" type="text" name="color" required [(ngModel)]="car.color" placeholder="Color">
+                    </div>
+
+                    <div class="col-12 campo">
+                        <label>Tipo de Vehiculo</label>
+                        <select class="form-control" [(ngModel)]="car.tipo" [ngModelOptions]="{standalone: true}">
+                            <option>Auto Hatchback</option>
+                            <option>Auto Sedán</option>
+                            <option>Camioneta Pick-up</option>
+                            <option>SUV - Jeep</option>
+                        </select>   
+                    </div>
+                
+                    <div class="col-12 campo">
+                        <label>Recinto</label>
+                        <select class="form-control" name="recinto" (change)="selectRecinto($any($event.target).value)">
+                            <option *ngIf="recinto.nombre === ''" [ngValue]='recinto.nombre'>Selecciona un recinto</option>    
+                            <option *ngFor="let r of recintos" [ngValue]='r.nombre'>{{r.nombre}}</option>
+                         </select>
+                    </div>
+                    
+                
+
+                    <div class="col-12 ">
+                        <button class="btn btn-outline-primary btn-block" style="margin-bottom:10px" type="submit">
+                        Guardar
+                    </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

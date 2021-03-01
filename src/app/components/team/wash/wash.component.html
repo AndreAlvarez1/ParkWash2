@@ -1,0 +1,155 @@
+<app-sidebar></app-sidebar>
+
+<app-loading *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading" class="contenedor2">
+    
+    <div class="row encabezado f_gris pad20">
+        <div class="col-6">
+            <h1 *ngIf="id === 'nuevo' "(click)="info()">Nuevo Lavado</h1>
+            <h1 *ngIf="id !== 'nuevo' "(click)="info()">Lavado #{{id}}</h1>
+        </div>
+
+        <div class="col-6 text-right">
+          <button class="btn btn-outline-warning" routerLink="/team/washes">Volver</button>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin:0">
+       
+        <div class="col-12 col-md-6 pad20 bg_light shadow">
+           <div class="row">
+               <div class="col-12">
+                   <label>Escoge un Lavador</label>          
+                   <select *ngIf="team.length > 0 " class="form-control" [(ngModel)]="wash.washerId" [ngModelOptions]="{standalone: true}" (change)="selectWasher($any($event.target).value)">
+                       <option [value]="w.id" *ngFor="let w of team">{{w.firstName}} {{w.lastName}} </option>
+                   </select>
+
+                   <label>Escoge un Recinto</label>
+                   <select class="form-control" name="recinto" (change)="selectRecinto($any($event.target).value)">
+                       <option *ngIf="wash.recintoId === 0 " >Selecciona un recinto</option>    
+                       <option *ngFor="let r of recintos" [ngValue]='r.nombre'>{{r.nombre}}</option>
+                    </select>  
+
+                    <hr>
+
+                    <div *ngIf="wash.recintoId > 0">
+
+                    <button *ngIf="car.id < 1 "class="btn btn-warning btn-block" (click)="modalAutos = true" >Seleccionar Auto</button>
+
+                    <div *ngIf="car.id > 0" class = "row auto">
+                        <div class="col-12">
+                            <h2>{{car.marca}} - {{car.modelo}}</h2>
+                            <p>Patente: <span>{{car.patente}}</span></p>
+                            <p>Info: <span>{{car.color}} {{car.tipo}}</span></p>
+                            <p>Cliente: <span>{{car.firstName}} {{car.lastName}} </span></p>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-warning pointer" (click)="modalAutos = true">Cambiar Vehiculo</p>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <label>Fecha de lavado</label>
+                            <p (click)="editFecha = !editFecha" class="text-primary pointer">{{wash.washDate | date: 'dd/MM/yyyy' }}  {{wash.washDate | date: 'hh:mm' }} <i class="fas fa-pencil-alt"></i> </p>               
+                            <input *ngIf="editFecha" class="form-control" type="datetime-local" [(ngModel)]="wash.washDate" >
+                        </div>
+                    </div>
+                  
+         
+
+                    <div class="row mt-2">
+                        <div class="col-12 observaciones">
+                            <select class="form-control" name="estado" [(ngModel)]="wash.status" (change)="selectEstado($any($event.target).value)">
+                                <option value = 1 > Por Lavar </option>
+                                <option value = 2 > Lavando </option>
+                                <option value = 3 > Lavado </option>
+                                <option value = 4 > No se pudo Lavar</option>
+                            </select>   
+                        </div>
+                    </div>
+
+                    
+                    
+
+                    <button class="btn btn-lg btn-block btn-success mt-2" (click)="guardarLavado('insert')">Guardar Lavado</button>
+
+                </div>
+
+
+    
+                </div>
+           </div>
+        </div>
+
+        <!-- Derecha -->
+        <div class="col-12 col-md-6">
+        </div>
+   
+    
+    
+    </div>
+</div>
+
+
+<div *ngIf="modalAutos === true" class="row fondoModif animated fadeIn" style="margin:0">
+    <div class="col-7 offset-5 animated slideInRigth">
+       
+
+        
+        <div class="row f_calipso2 pad20 mod">
+            <div class="col-10">
+                <h1>Selecciona un Vehiculo</h1>
+            </div>
+            <div class="col-2">
+                <i class="fas fa-times fa-2x" (click)="modalAutos = false "></i>
+            </div>
+        </div>
+
+        <div class="row bg-light pad20">
+            <div class="col-12">
+                <label><i class="fas fa-search"></i> Buscador</label>
+                <input type="text" class="form-control" name="searchString" placeholder="Buscador..." [(ngModel)]="searchString" />
+            </div>
+        </div>
+
+        <div class="row tablaAutos">
+            <div class="col-12 table-responsive"  style="padding:0">
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Patente</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Color</th>
+                            <th>Tamaño</th>
+                            <th>Dueño</th>
+                            <th>Plan</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="cars.length > 0">
+                        <tr class="pointer" *ngFor="let c of cars | filter : { 'patente' : searchString, 'marca': searchString, 'modelo': searchString, 'color': searchString, 'size': searchString, 'firstName': searchString, 'lastName': searchString, 'description': searchString} : false ; index as i " (click)="selectCar(c)">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{c.patente}} </td>
+                            <td>{{c.marca}} </td>
+                            <td>{{c.modelo}} </td>
+                            <td>{{c.color}} </td>
+                            <td>{{c.size}} </td>
+                            <td>{{c.firstName}} {{c.lastName}} </td>
+                            <td>{{c.description}} </td>
+                        
+                        </tr>
+                    </tbody>
+                    <div *ngIf="cars.length < 1" class="text-center">
+                        <p>No hay vehiculos</p>
+                    </div>
+                </table>
+             </div>
+        </div> 
+
+
+    </div>
+</div>

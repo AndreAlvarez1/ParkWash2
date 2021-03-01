@@ -1,0 +1,326 @@
+.navbar{
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+.navizq {
+    margin-left:0
+  }
+
+  p{
+    text-align: justify;
+  }
+
+
+  .logoNavbar {
+      width: 150px;
+  }
+
+  ul{
+    list-style-type: none;
+  }
+
+  h1{
+    font-size: 2.5em;
+    line-height: 1em;
+    font-weight: 700;
+  }
+
+
+.tiular { 
+    padding-top:30vh;
+}
+.para h1{
+    color:white;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1em;
+    font-weight: 700;
+    z-index: 3;
+  }
+  
+  .para h2{
+    color:white;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .parallax1{
+    background-image: url(src/assets/images/slider1.jpg);
+    background-blend-mode: darken;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+    color:white;
+    padding: 50px 10px;
+    height: 600px;
+  }
+
+  .parallax2{
+    background: rgba(0, 0, 0, 0.35) url(src/assets/images/plantas.jpg);
+    background-blend-mode: darken;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+    color:white;
+    padding: 0 10px;
+    height: 500px;
+  }
+  
+  .parallax3{
+    background: rgba(0, 0, 0, 0.35) url(src/assets/images/informes2.jpg);
+    background-blend-mode: darken;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+    color:white;
+    padding: 50px 10px;
+    height: 600px;
+  }
+  
+  .parallax4{
+    background: rgba(0, 0, 0, 0.35) url(src/assets/images/mano.jpg);
+    background-blend-mode: darken;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+    color:white;
+    padding: 50px 10px;
+    height: 500px;
+  }
+
+
+  .franja{
+    background-color: #F5F5F5;
+    padding: 40px 0;
+    color:#032C4C;
+  }
+  
+  .franja h1{
+    font-size: 2.5em;
+    text-align: center;
+    color:#71839A;
+  }
+  
+  .franja p{
+    padding: 0 60px;
+    font-size: 1em;
+    text-align: center;
+  }
+  
+  .franja span{
+    font-weight: bold;
+  }
+
+  .uno{
+    background-image: url(src/assets/images/fondo1.jpg);
+    background-blend-mode: darken;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:white;
+    padding: 200px 10px;
+  }
+
+  .dos{
+    padding: 0 10px;
+    color:black;
+  }
+  
+  .dosIzq{
+    padding: 50px 0;
+  }
+  
+  .dosDer{
+    background-image: url(src/assets/images/fondo2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .tres{
+    background-color: #F4F4F4;
+    padding: 50px 10px;
+  }
+  
+/* PLANES */
+  .planes{
+    background-color: #71839A;
+  }
+  
+  .tituloPlanes{
+    margin: 40px 0 20px;
+    color:white;
+    text-align: center;
+  }
+  
+  .tituloPlanes h2{
+    font-size: 1em;
+  }
+
+
+  .planHome{
+    padding-bottom: 10px;
+  }
+
+  .inhabilitado li{
+    color:#A9A9A9;
+  }
+
+  .nohab {
+    color:#A9A9A9;
+  }
+
+  .card-header h5{
+    font-size: 3em;
+    display: block;
+    color:white;
+    margin: 0;
+  }
+  
+  .card-header p{
+      font-size: 1.3em;
+      color:white;
+      margin: 0;
+      color: white;
+      padding: 0;
+  }
+  
+  .card-body {
+    padding: 0;
+  }
+  
+  .card-text{
+      padding: 10px;
+  }
+  
+  ul.list-group.list-group-striped li:nth-of-type(odd){
+      background: white;
+      padding: 10px;
+  }
+  ul.list-group.list-group-striped li:nth-of-type(even){
+      background: #EDEDED;
+      padding: 10px;
+  }
+  
+  ul.list-group.list-group-hover li:hover{
+      background: rgba(112,121,122, 0.5);
+  }
+
+  .iconoHome{
+    width:30%;
+    margin-bottom: 20px;
+  }
+
+   
+  .icono-almedio{
+    float:none;
+    margin-left: auto;
+    margin-right:auto;
+  }
+  
+  .argumento{
+    min-height: 400px;
+    color:white;
+    padding: 60px 20px;
+  }
+  
+  .argumento h1{
+    text-align: left;
+    color:white;
+  }
+  
+  .argumento p{
+    text-align: left;
+    font-size: 1em;
+  }
+  
+  
+
+  .argumento1{
+    background-image: url(src/assets/images/argumento1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .argumento2{
+    background-image: url(src/assets/images/argumento2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .argumento3{
+    background-image: url(src/assets/images/argumento3.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .argumento4{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(src/assets/images/argumento4.jpg);
+  }
+
+  .titularNatural{
+    padding-top:80px;
+  }
+
+
+  footer{
+    background-color: black;
+    padding: 20px;
+    color:white;
+  }
+  
+
+ @media (min-width: 768px) {
+
+  .navizq {
+    margin-left: 20%;
+  }
+
+    .logoNavbar {
+        width: 250px;
+    }
+    .titular{
+      padding-top:10vh;      
+    }
+    .parallax1{
+        height: 600px;
+      }
+    
+      .para h1{
+        color:white;
+        font-size: 4em;
+        text-transform: uppercase;
+        text-align: center;
+      }
+    
+      .para h2{
+        color:white;
+        font-size: 2em;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .tres{
+        padding: 150px 10px;
+      }
+ }
+
+
+

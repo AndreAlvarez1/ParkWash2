@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap');
+
+*{
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.pad20{
+  padding:20px;
+}
+
+.contenedor2 {
+  margin: 0 0 0 0;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.celeste {
+    color:#71839A;
+  }
+
+  .f_verde {
+    background-color: #3F8642;
+  }
+  
+  .f_rojo {
+    background-color: #E40000;
+  }
+  
+  .f_celeste {
+    background-color: #378CBE;
+  }
+
+  .f_celeste2 {
+    background-color: #2996F3;
+  }
+
+  .f_negro {
+    background-color: #0B0C10;
+  }
+
+  .f_gris {
+    background-color: #1F2833;
+    color:white;
+  }
+
+  .f_calipso {
+    background-color: #66FCF1;
+  }
+
+  .f_calipso2 {
+    background-color: #45A29E;
+  }
+
+  .f_blanco {
+    background-color: white;
+  }
+
+
+
+      
+
+
+
+  .cabecera {
+    padding:20px;
+  }
+
+  .cabecera h1{
+    font-weight: 700;
+    font-size: 2em;
+    margin-bottom: 0;
+    color:#1F1F1F;
+  }
+
+
+  .fondoModif {
+    background-color: rgba(0, 5, 46, 0.6);
+    position: fixed;
+    top: 0;
+    z-index: 1050;
+    height: 100vh;
+    width: 100%;
+    /* align-items: center; */
+}
+
+.modalForm{
+  background-color: white;
+  padding: 20px;
+}
+
+.campo{
+  margin-bottom: 10px;
+}
+
+.error{
+  color:red;
+  margin-left: 10px;
+}
+  @media (min-width: 800px) {
+    .contenedor2 {
+        margin: 0 0 0 200px;
+    }
+  }

@@ -1,0 +1,125 @@
+<app-sidebar></app-sidebar>
+
+<app-loading *ngIf="loading"></app-loading>
+
+
+<!--  PERFIL CLIENTE -->
+<div *ngIf="!loading && user.level === 1" class="contenedor2">
+
+    <div class="row cabecera shadow">
+        <div class="col-12">
+            <h1 (click)="info()"><i class="fas fa-user-alt"></i> Perfil</h1>
+        </div>
+    </div>
+    
+    <div *ngIf="cars.length < 1" class="row cars text-center shadow" style="padding:20px">
+        <div class="col-12">
+            <p>Aún no has registrado ningún vehiculo</p>
+        </div>
+    </div>
+
+    <div *ngIf="cars.length > 0" class="row cars">
+        <div class="col-2 text-right icono">
+            <i class="fas fa-car fa-4x"></i>
+        </div>
+        <div class="col-10">
+           
+            <div *ngFor="let c of cars" class="row auto">
+               <div class="col-10">
+                   <h2>{{c.modelo}}</h2>
+                   <p>Marca: {{c.marca}}</p>
+                   <p>color: {{c.color}}</p>
+                   <p>patente: {{c.patente}}</p>
+                   <p>Tipo: {{c.tipo}}</p>
+               </div>
+               <div class="col-2 text-right">
+                   <h2 (click)="editar(c)" ><i class="fas fa-pencil-alt ico"></i></h2>
+                   <h2 (click)="borrar(c)" ><i class="fas fa-trash ico"></i></h2>
+               </div>
+           </div>
+        </div>
+    </div>
+
+    <div *ngIf="agregar" class="row text-center mt-2">
+        <div class="col-12">
+            <button class="btn btn-primary" (click)="modalVehiculo = true">Agregar un vehiculo</button>
+        </div>
+    </div>
+    
+    <!-- <div *ngIf="!agregar" class="row text-center mt-2">
+        <div class="col-10 offset-1 col-md-6 offset-md-3">
+            <p>Para poder agregar más vehiculos te invitamos a hacer un upgrade como usuario Premium</p>
+        </div>
+    </div> -->
+    
+   
+
+
+
+    <div *ngIf="plans.length > 0 " class="row pad20">
+        
+        <div class="col-12">
+            <h1>Planes</h1>
+            <p *ngIf="car.planId === 0"> Escoge un plan a tu medida</p>
+            <p *ngIf="car.planId !== 0"> Planes disponibles</p>
+        </div>
+
+        <div *ngFor="let plan of plans" class="col-12 col-md-4">
+            <div [ngClass]="plan.id === car.planId ? 'selected': 'no' " class="plan shadow">
+                <h1>{{plan.name}}</h1>
+                <h3>{{plan.description}}</h3>
+                <p *ngIf="car.size === 1" >$ {{plan.price_normal_car | number }}</p>
+                <p *ngIf="car.size === 2" >$ {{plan.price_big_car | number }}</p>
+                <button  *ngIf="plan.id !== car.planId" class="btn btn-primary text-center" (click)="choosePlan(plan)">Escoger este plan</button>
+                <button  *ngIf="plan.id === car.planId" class="btn btn-success text-center" >Este es tu plan</button>
+            </div>
+        </div>
+    </div>
+    
+    <!--  -->
+
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Tarjeta</h1>
+            <button class="btn btn-primary" (click)="webpay(123)">Webpay</button>
+            <button class="btn btn-primary" (click)="inscription()">Inscription</button>
+        </div>
+    </div>
+
+
+</div><!-- FIN CONTENEDOR-->
+
+
+
+
+<!-- PERFIL TEAM-->
+<div *ngIf="!loading && user.level !== 1" class="contenedor2">
+
+<div class="row pad20">
+    <div class="col-12">
+        <h1 style="font-weight: 700;">Bienvenido <br> {{user.firstName}} {{user.lastName}}</h1>
+    </div>
+</div>
+
+<div *ngIf="washes.length > 0" class="row pointer">
+    <div  *ngFor="let l of washes ; index as i"  class="col-12 col-md-6 offset-3 lavado shadow" (click)="abrirLavado(l.id)">
+        <h1>{{l.marca}} {{l.modelo}}</h1>
+        <p>Fecha Lavado: {{l.washDate | date: 'dd/MM/yyyy' }} a las {{l.washDate | date: 'hh:mm' }}</p>
+        <p>{{l.recinto}}</p>
+        <p>{{l.patente}} | {{l.tipo}} | {{l.color}}</p>
+        <p>{{l.description}}</p>
+        <hr>
+        <div class=text-right>
+
+            <p *ngIf="l.status === 1" class="text-primary"><i class="fas fa-hourglass-half"></i> Por Lavar</p>
+            <p *ngIf="l.status === 2" class="text-warning"><i class="fas fa-hand-sparkles"></i> Lavando</p>
+            <p *ngIf="l.status === 3" class="text-succes"><i class="fas fa-check"></i> Lavado</p>
+            <p *ngIf="l.status === 4" class="text-danger"><i class="fas fa-times"></i> No se pudo Lavar</p>
+        </div>
+
+    </div>
+</div>
+</div>
+
+

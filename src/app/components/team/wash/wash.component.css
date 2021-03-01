@@ -1,0 +1,38 @@
+.mod {
+    color:white;
+}
+
+.tablaAutos {
+    background-color: white;
+}
+
+.auto {
+    padding:20px;
+    background-image: url(src/assets/images/tweed.png);
+    margin-bottom: 10px;
+}
+
+.auto h2{
+    font-size: 1.5em;
+    font-weight: 700;
+    color: white;
+}
+
+.auto p {
+    color: white;
+
+}
+
+.auto span {
+    color: #2996F3
+}
+
+.observaciones span{
+    color: #1F2833;
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.filtros {
+    padding:20px;
+}

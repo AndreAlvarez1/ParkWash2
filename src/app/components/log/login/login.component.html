@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-12 col-md-8 f_celeste2 text-center login animated slideInLeft">
+        <h1>Bienvenido</h1>
+        <p>Ingresa tu correo y contraseña por favor</p>
+
+        <form (ngSubmit)="validarUsuario(form)" #form="ngForm" class="row validate-form ">
+            <div class="col-10 offset-1 col-md-6 offset-md-3 campo">
+                <span *ngIf="form.submitted && form.controls['email'].errors" class="error">Debes ingresar un correo por favor</span>
+                <input class="form-control " type="text" name="email" required email [(ngModel)]="usuario.email" placeholder="Email">
+            </div>
+
+            <div class="col-10 offset-1 col-md-6 offset-md-3 campo" data-validate="Password is required">
+                <span *ngIf="form.submitted && form.controls['password'].errors" class="error">Debes ingresar un password por favor</span>
+                <input class="form-control" type="password" name="password" required minlength="6" [(ngModel)]="usuario.password" placeholder="Password">
+            </div>
+
+            <div class="col-10 offset-1 col-md-6 offset-md-3 ">
+                <button class="btn btn-outline-light btn-block" style="margin-bottom:10px" type="submit">
+                Loguearse
+            </button>
+            </div>
+
+            <div class="col-10 offset-1 text-center">
+                <p routerLink="/logs/registro" class="pointer">¿No tienes cuenta?</p>
+                <p routerLink="/logs/reset" class="pointer">¿Olvidaste tu constraseña?</p>
+            </div>
+        </form>
+        
+    </div>
+    <div class="col-12 col-md-4 text-center d-none d-md-block">
+        <img src="assets/images/logo_color.png"  alt="" class="logo">
+    </div>
+</div>

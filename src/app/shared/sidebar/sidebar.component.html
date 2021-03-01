@@ -1,0 +1,73 @@
+<div class="nav-side-menu">
+    <div class="brand ">
+        <!--<img src="../../../assets/images/logo_stats.svg">-->
+        <img src="./assets/images/logo_blanco.png">
+    </div>
+    <p>Bievenido:</p>
+    <p>{{user.firstName | titlecase}} {{user.lastName | titlecase}}</p>
+
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li routerLink="/user/perfil">
+                <a class="nav-link">
+                    <i class="fas fa-user"></i> Perfil
+                </a>
+            </li>
+
+            <!-- CLIENTES -->
+          <div *ngIf="user.level === 1">
+
+              <li routerLink="/user/autos">
+                <a class="nav-link" routerLink="/user/cars">
+                    <i class="fas fa-car"></i> Mis Vehiculos
+                </a>
+            </li>
+        </div>
+          
+        <!-- Lavadores -->
+          <div *ngIf="user.level === 0">
+
+              <li routerLink="/user/autos">
+                <a class="nav-link" routerLink="/team/washes">
+                    <i class="fas fa-car"></i> Lavados
+                </a>
+            </li>
+              <li routerLink="/user/autos">
+                <a class="nav-link" routerLink="/team/wash/nuevo">
+                    <i class="fas fa-plus"></i> Ingresar lavado
+                </a>
+            </li>
+
+        </div>
+
+            <!-- <li data-toggle="collapse" data-target="#ventas">
+                <a><i class="fas fa-money-bill-wave"></i> Ventas Generales </a>
+            </li> 
+
+             <ul class="sub-menu collapse" id="ventas">
+                <li><a class="nav-link" routerLink="/ventames" routerLinkActive="active">Venta Mensual</a>
+                </li>
+                <li><a class="nav-link" routerLink="/ventasperiodo" routerLinkActive="active">Ventas por periodo</a>
+                </li>
+                <li><a class="nav-link" routerLink="/ventasPersonal" routerLinkActive="active">Ventas Personal</a>
+                </li>
+                <li><a class="nav-link" routerLink="/ventasCanales" routerLinkActive="active">Ventas por Canales</a>
+                </li>
+                <li><a class="nav-link" routerLink="/ranking" routerLinkActive="active">Ranking de Productos</a>
+                </li>
+                <li><a class="nav-link" routerLink="/detalleVentas" routerLinkActive="active">Detalle Ventas</a>
+                </li>
+                <li><a class="nav-link" routerLink="/consolidado" routerLinkActive="active">Consolidad de Ventas</a>
+                </li>
+            </ul> -->
+
+            <li (click)="cerrarSesion()">
+                <a class="nav-link">
+                    <i class="fas fa-door-open"></i> Cerrar Sesión
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</div>

@@ -1,0 +1,19 @@
+.login {
+    height: 100vh;
+    color:white;
+    padding-top: 20vh;
+}
+
+.login h1 {
+    font-weight: 700;
+    margin-bottom:0;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+.logo {
+    margin-top: 40vh;
+    width: 200px;
+}

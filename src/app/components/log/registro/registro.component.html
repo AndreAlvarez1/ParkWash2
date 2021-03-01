@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-12 col-md-4 text-center d-none d-md-block animated fadeIn">
+        <img src="assets/images/logo_color.png"  alt="" class="logo">
+    </div>
+
+    <div class="col-12 col-md-8 f_celeste2 text-center registro animated slideInRight">
+        <h1 (click)="info()">Registro</h1>
+        <p>Para tener tu auto siempre brillante solo neceitamos algunos pocos datos</p>
+
+        <form (ngSubmit)="guardar(form)" #form="ngForm" class="row validate-form ">
+            
+            
+            <div class="col-10 offset-1 col-md-5 offset-md-1 campo">
+                <span *ngIf="form.submitted && form.controls['firstName'].errors" class="error">Debes ingresar un nombre</span>
+                <input class="form-control " type="text" name="firstName" required [(ngModel)]="usuario.firstName" placeholder="Nombre">
+            </div>
+
+            <div class="col-10 offset-1 col-md-5  offset-md-0 campo" data-validate="Password is required">
+                <span *ngIf="form.submitted && form.controls['lastName'].errors" class="error">Debes ingresar tu apellido por favor</span>
+                <input class="form-control" type="text" name="lastName" required minlength="4" [(ngModel)]="usuario.lastName" placeholder="Apellido">
+            </div>
+            
+
+            <div class="col-10 offset-1 col-md-5 offset-md-1 campo">
+                <span *ngIf="form.submitted && form.controls['cellphone'].errors" class="error">Debes ingresar un celular</span>
+                <input class="form-control" type="text" name="cellphone" required [(ngModel)]="usuario.cellphone" placeholder="+569 1111 1111">
+            </div>
+
+            <div class="col-10 offset-1 col-md-5 offset-md-0 campo">
+                <select class="form-control" [(ngModel)]="usuario.gender" [ngModelOptions]="{standalone: true}">
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                    <option>Otro</option>
+                </select>   
+            </div>
+            
+            
+            <div class="col-10 offset-1 col-md-5 offset-md-1 campo">
+                <span *ngIf="form.submitted && form.controls['rut'].errors" class="error">Debes ingresar tu rut</span>
+                <input class="form-control" type="text" name="rut" required [(ngModel)]="usuario.rut" placeholder="11.222.333-4">
+            </div>
+
+            <div class="col-10 offset-1 col-md-5 offset-md-0 campo">
+                <span *ngIf="form.submitted && form.controls['email'].errors" class="error">Debes ingresar un correo por favor</span>
+                <input class="form-control" type="email" name="email" required email [(ngModel)]="usuario.email" placeholder="Email">
+            </div>
+            
+            
+            <div class="col-10 offset-1 col-md-5 offset-md-1 campo" data-validate="Password is required">
+                <span *ngIf="form.submitted && form.controls['password'].errors" class="error">Debes ingresar un password por favor</span>
+                <input class="form-control" type="password" name="password" required minlength="6" [(ngModel)]="usuario.password" placeholder="Password">
+            </div>
+            <div class="col-10 offset-1 col-md-5 offset-md-0 campo" data-validate="Password is required">
+                <span *ngIf="form.submitted && form.controls['password2'].errors" class="error">Confirma tu password porfavor</span>
+                <input class="form-control" type="password" name="password2" required minlength="6" [(ngModel)]="usuario.password2" placeholder="Password">
+            </div>
+
+            <div class="col-10 offset-1 col-md-6 offset-md-3 ">
+                <button class="btn btn-outline-light btn-block" style="margin-bottom:10px" type="submit">
+                Guardar
+            </button>
+            </div>
+
+            <div class="col-10 offset-1 text-center">
+                <p routerLink="/logs/login" class="pointer">Volver</p>
+            </div>
+        </form>
+        
+    </div>
+ 
+</div>
