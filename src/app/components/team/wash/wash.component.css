@@ -36,3 +36,19 @@
 .filtros {
     padding:20px;
 }
+
+
+.izquierda{
+    min-height: 100vh;
+}
+
+.derecha h1{
+    font-size: 1.6em;
+    font-weight: 700;
+}
+
+
+/* SUBIR */
+.fotoAuto {
+    width: 100%;
+}

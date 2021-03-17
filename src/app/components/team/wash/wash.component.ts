@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ConectorService } from 'src/app/services/conector.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+
 import { CarModel } from '../../models/car.model';
 import { UserModel } from '../../models/user.model';
 import { WashModel } from '../../models/wash.model';
 import Swal from 'sweetalert2';
+import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
 
 
 @Component({
@@ -33,9 +37,25 @@ export class WashComponent implements OnInit {
   modalAutos = false;
   editFecha = false;
 
+    // SUBIR FOTO
+  public archivoForm = new FormGroup({
+    archivo: new FormControl(null, Validators.required),
+  });
+  
+  public mensajeArchivo = 'No hay un archivo seleccionado';
+  public datosFormulario = new FormData();
+  public nombreArchivo = '';
+  public URLPublica = '';
+  public porcentaje = 0;
+  public finalizado = false;
+  public photo = '';
+  // public photo = 'https://firebasestorage.googleapis.com/v0/b/parkwash-fa1eb.appspot.com/o/monty.png?alt=media&token=db7c84ac-449e-4964-860d-ab9d1f97a634';
+
+
   constructor(private conex: ConectorService,
               private route: ActivatedRoute,
-              private router: Router) { 
+              private router: Router,
+              private firebaseStorage: FirebaseStorageService) { 
               this.id = this.route.snapshot.paramMap.get('id') || '';
               if (this.id === 'nuevo'){
                 this.editFecha = true;
@@ -106,8 +126,8 @@ export class WashComponent implements OnInit {
           this.cars = resp['datos'];
           if (this.id !== 'nuevo'){
             this.car = this.cars.find( (c:any) => c.id === this.wash.carId);
-            this.loading = false;
           }
+          this.loading = false;
         });
   }
 
@@ -120,6 +140,7 @@ export class WashComponent implements OnInit {
   
   guardarLavado(tarea:string){
     console.log('guardar', this.wash);
+
     if (this.wash.washerId === 0 || this.wash.carId === 0 || this.wash.recintoId === 0 || this.wash.washDate === ''){
       console.log('faltan datos');
       this.error('Te faltaron datos');
@@ -137,7 +158,9 @@ export class WashComponent implements OnInit {
               .subscribe( (resp:any) => { 
                 console.log('guardé', resp);
                 this.exito('Lavado guardado con éxito')
-                this.router.navigateByUrl('/team/washes');
+                if (tarea === 'insert'){
+                  this.router.navigateByUrl('/team/washes');
+                }
               });
   }
 
@@ -164,6 +187,58 @@ selectEstado(value:number){
   this.wash.status = Number(value);
   console.log('wash', this.wash);
 }
+
+
+//  =============================================  //
+//  =============================================  //
+//  =============================================  //
+//  ================== Subir Foto
+//  =============================================  //
+//  =============================================  //
+//  =============================================  //
+
+
+
+ //Evento que se gatilla cuando el input de tipo archivo cambia
+ public cambioArchivo(event:any) {
+  if (event.target.files.length > 0) {
+    for (let i = 0; i < event.target.files.length; i++) {
+      this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
+      this.nombreArchivo = event.target.files[i].name;
+      this.datosFormulario.delete('archivo');
+      this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name)
+    }
+  } else {
+    this.mensajeArchivo = 'No hay un archivo seleccionado';
+  }
+}
+
+//Sube el archivo a Cloud Storage
+public subirArchivo() {
+  let archivo = this.datosFormulario.get('archivo');
+  let referencia = this.firebaseStorage.referenciaCloudStorage(this.nombreArchivo);
+  let tarea = this.firebaseStorage.tareaCloudStorage(this.nombreArchivo, archivo);
+
+  //Cambia el porcentaje
+  tarea.percentageChanges().subscribe((porcentaje:any) => {
+    this.porcentaje = Math.round(porcentaje);
+    console.log('porcentaje', this.porcentaje);
+    if (this.porcentaje == 100) {
+      this.finalizado = true;
+    }
+  });
+
+  referencia.getDownloadURL().subscribe((URL) => {
+    this.URLPublica = URL;
+    this.wash.photo = URL;
+    console.log('url', this.URLPublica);
+    this.guardarLavado('update');
+  }, err =>{ console.log('error', err)});
+}
+
+
+
+
 
 
 //  =============================================  //
