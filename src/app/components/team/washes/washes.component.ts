@@ -19,7 +19,7 @@ export class WashesComponent implements OnInit {
   date = new Date();
   searchString = '';
   firstDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth(), 1));
-  lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0));
+  lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth() + 2, 1));
 
   hoy = new Date().toLocaleString().slice(0, 19).replace('T', ' ');
 
@@ -62,7 +62,7 @@ export class WashesComponent implements OnInit {
     if (value === 'Todos'){
       this.recinto = new RecintoModel();
       this.recinto.id = 0;
-      this.recinto.nombre = 'todos';
+      this.recinto.nombre = 'Todos';
       return;
     }
 
@@ -103,7 +103,7 @@ export class WashesComponent implements OnInit {
     this.firstDay = f.value["fechaIni"];
     this.lastDay = f.value["fechaFin"];
 
-    let recintoId:any = 'todos';
+    let recintoId:any = 'Todos';
 
     if (this.recinto.id != 0){
       recintoId = this.recinto.id

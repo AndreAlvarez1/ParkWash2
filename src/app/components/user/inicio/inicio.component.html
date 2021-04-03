@@ -1,0 +1,41 @@
+<app-sidebar></app-sidebar>
+
+<app-loading *ngIf="loading"></app-loading>
+
+
+<!--  PERFIL CLIENTE -->
+<div *ngIf="!loading && user.level === 1" class="contenedor2">
+
+<div class="row" style="padding:20px">
+        <div class="col-12 col-md-6 izq">
+            <h1 (click)="info()">Bienvenido</h1>
+            <h2>{{user.firstName}} {{user.lastName}}</h2>
+            <hr>
+
+            <div class="row" >
+                <div class="col-12">
+                    <h3>Tus Próximos lavados</h3>
+                    <div *ngFor="let w of washes" class="row lavado shadow" (click)="abrirLavado(w)">
+                        <div class="col-12">
+                            <h1>{{w.marca}} {{w.modelo}}</h1>
+                            <p>Patente: <span>{{w.patente}}</span></p>
+                            <p>Fecha: <span>{{w.washDate | date: 'dd/MM' }} a las {{w.washDate | date: 'hh:mm'}}</span></p>
+                            <p>Persona a cargo: <span>{{w.washerFirst}} {{w.washerLast}}</span></p>
+                            <p *ngIf="w.status === 1" class="text-primary text-right"><i class="fas fa-hourglass-half"></i> Por Lavar </p>
+                            <p *ngIf="w.status === 2" class="text-warning text-right"><i class="fas fa-hand-sparkles"></i> Lavando </p>
+                            <p *ngIf="w.status === 3" class="text-success text-right"> <i class="fas fa-check"></i> Lavado </p>
+                            <p *ngIf="w.status === 4" class="text-danger text-right"> <i class="fas fa-times"></i> No se pudo Lavar</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="col-12 col-md-6">
+        <p>Publi</p>
+    </div>
+</div>
+</div>
+
+

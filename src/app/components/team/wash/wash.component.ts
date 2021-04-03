@@ -20,6 +20,7 @@ import { FirebaseStorageService } from 'src/app/services/firebase-storage.servic
 export class WashComponent implements OnInit {
   
   loading = true;
+  loading2 = true;
   searchString: string = '';
 
   id: any;
@@ -29,6 +30,8 @@ export class WashComponent implements OnInit {
   team: any[]       = [];
   recintos: any[]   = [];
   cars: any[]       = [];
+  antes: any[]       = [];
+  despues: any[]       = [];
 
   wash: WashModel = new WashModel();
   car: CarModel = new CarModel();
@@ -60,6 +63,8 @@ export class WashComponent implements OnInit {
               if (this.id === 'nuevo'){
                 this.editFecha = true;
               }
+
+              this.getFotos();
               }
 
   ngOnInit(): void {
@@ -214,7 +219,7 @@ selectEstado(value:number){
 }
 
 //Sube el archivo a Cloud Storage
-public subirArchivo() {
+public subirArchivo(tipo:string) {
   let archivo = this.datosFormulario.get('archivo');
   let referencia = this.firebaseStorage.referenciaCloudStorage(this.nombreArchivo);
   let tarea = this.firebaseStorage.tareaCloudStorage(this.nombreArchivo, archivo);
@@ -230,14 +235,59 @@ public subirArchivo() {
 
   referencia.getDownloadURL().subscribe((URL) => {
     this.URLPublica = URL;
-    this.wash.photo = URL;
     console.log('url', this.URLPublica);
+    this.guardarFoto(tipo, URL);
     this.guardarLavado('update');
   }, err =>{ console.log('error', err)});
 }
 
 
+guardarFoto(type:string, urlPhoto:string){
+  const body = { 
+    washId: this.id,            
+    tipo:type,
+    url: urlPhoto
+  }
+  // console.log('guardo la foto', body);
+  this.conex.guardarDato('/post/photos/insert', body)
+            .subscribe ( resp => { 
+                console.log('guarde en fotos', resp);
+                this.getFotos();
+              });
+}
 
+getFotos(){
+  this.antes = [];
+  this.despues = [];
+  if (this.id === 'nuevo'){
+    return;
+  }
+  this.loading2 = true;
+  this.conex.getDatos('/photos/' + this.id)
+            .subscribe( (resp:any) => { 
+                        console.log('fotos', resp);
+                        const fotos = resp['datos'];  
+                        for (let f of fotos){
+                          if (f.tipo === 'antes' && f.status > 0){
+                            this.antes.push(f)
+                          } else if(f.tipo === 'despues' && f.status > 0){
+                            this.despues.push(f)
+                          }
+                        }
+                        this.loading2 = false;
+                      });
+}
+
+borrar(f:any){
+  console.log('foto',f);
+  const body = {
+    washId: this.id, 
+    id: f.id,         
+    tipo:'borrar',
+    status: 0
+  }
+  this.conex.guardarDato('/post/photos/borrar', body).subscribe(resp => { console.log('borrado', resp); this.getFotos()});
+}
 
 
 

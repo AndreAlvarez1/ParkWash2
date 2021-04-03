@@ -4,7 +4,6 @@ export class WashModel {
     carId: number;;
     recintoId: number;
     discount: number;
-    photo: string;
     status: number;
     receipt: string;
     observation: string;
@@ -18,7 +17,6 @@ export class WashModel {
     this.carId = 0;
     this.recintoId = 0;
     this.discount = 0;
-    this.photo = '';
     this.status = 1;
     this.receipt = '';
     this.observation = '';

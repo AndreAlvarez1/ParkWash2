@@ -1,0 +1,76 @@
+<app-sidebar></app-sidebar>
+
+<app-loading *ngIf="loading"></app-loading>
+
+
+<div *ngIf="!loading"class="contenedor2">
+
+    <div class="row encabezado f_gris pad20">
+        <div class="col-6">
+            <h1 (click)="info()">Lavado #{{id}}</h1>
+        </div>
+        
+        <div class="col-6 text-right">
+            <button class="btn btn-outline-warning" routerLink="/user/lavados">Volver</button>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin:0">
+       
+        <div class="col-12">
+            <div *ngIf="wash.status === 1" class="row bg-primary estado text-center text-light">
+                <div class="col-12">
+                    <h1><i class="fas fa-hourglass-half"></i> Por Lavar</h1>
+                </div>
+            </div>
+          
+            <div *ngIf="wash.status === 2" class="row bg-warning estado text-center">
+                <div class="col-12">
+                    <h1><i class="fas fa-hand-sparkles"></i> Lavando</h1>
+                </div>
+            </div>
+         
+            <div *ngIf="wash.status === 3" class="row bg-success estado text-center text-light">
+                <div class="col-12">
+                    <h1><i class="fas fa-check"></i> Lavado</h1>
+                </div>
+            </div>
+          
+            <div *ngIf="wash.status === 4" class="row bg-danger estado text-center text-light">
+                <div class="col-12">
+                    <h1><i class="fas fa-times"></i> No se pudo Lavar</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row infoLavado text-center">
+        <div class="col-12 ">
+            <h1>{{car.marca}} {{car.modelo}}</h1>
+            <h2>Fecha Lavado: <span>{{wash.washDate | date: 'dd/MM'}}</span> a las <span>{{wash.washDate | date: 'hh:mm'}}</span></h2>
+            <p>{{car.patente}}</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div *ngIf="antes.length > 0" class="row antes text-center">
+        <div class="col-12">
+
+            <h1>Antes</h1>
+            <div *ngFor="let i of antes">
+                <img [src]="i.url" class="fotoAuto">
+            </div>
+
+        </div>
+    </div>
+
+</div>    
+
+
+
+
+    
+    
+    

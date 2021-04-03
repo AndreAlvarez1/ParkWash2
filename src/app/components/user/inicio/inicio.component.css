@@ -1,0 +1,36 @@
+.izq {
+    padding:20px;
+}
+
+.izq h1{
+    margin-bottom: 0px;
+    font-weight: 700;
+}
+
+.lavado{
+    background-color:  white;
+    padding:20px;
+    border-radius: 10px;
+}
+
+.lavado h1{
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.lavado p {
+    margin-bottom:0;
+}
+
+.lavado span {
+    font-weight: 700;
+}
+
+
+@media (min-width: 800px) {
+    .izq {
+        margin-top: 10%;
+    }
+
+}

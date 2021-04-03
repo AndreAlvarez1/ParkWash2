@@ -91,15 +91,64 @@
         <!-- Derecha -->
         <!-- Derecha -->
         <!-- Derecha -->
-        <div *ngIf="id !== 'nuevo' "class="col-12 col-md-6 pad20 derecha">
+
+        <div *ngIf="id !== 'nuevo' && loading2 === true"  class="col-12 col-md-6 pad20 derecha">
+             <div class="row">
+                <div class="col-12 text-center loading">
+                    <h1><i class="fas fa-air-freshener fa-2x fa-spin"></i></h1>
+                    <h1 class="animated pulse infinite">Loading</h1>
+                </div>        
+             </div>
+        </div>
+
+        <div *ngIf="id !== 'nuevo' && loading2 === false" class="col-12 col-md-6 pad20 derecha">
           
-            <img *ngIf="wash.photo != '' " [src]="wash.photo" class="fotoAuto">
+            <div *ngIf="antes.length > 0" class="row antes">
+                <h1>Antes</h1>
+                <div *ngFor="let i of antes" class="col-12">
+                    <i class="fas fa-times text-danger fa-2x borrar" (click)="borrar(i)"></i>
+                    <img [src]="i.url" class="fotoAuto">
+                </div>
+            </div>
+            
+          
 
             <div class="contenedor">
                 <div class="contenedor_formulario">
-                  <h1>Subir foto del vehiculo</h1>
+                  <h5 class="subir">Subir foto Antes</h5>
                  
-                  <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo()">
+                  <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo('antes')">
+                        <input class="form-control" type="file" formControlName="archivo" (change)="cambioArchivo($event)">
+                        <span class="file-name">
+                          {{ mensajeArchivo }}
+                        </span>
+                    <hr>
+
+                        <div *ngIf="porcentaje > 0 && porcentaje < 100" class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" [style.width]="porcentaje + '%'" ></div>
+                         </div>
+
+                    <button [ngClass]="{'button': true, 'btn btn-primary btn-block': true, 'btn-warning': porcentaje > 0 && porcentaje < 100}" [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
+                  </form>
+                </div>
+
+            </div>
+
+              <hr>
+
+            <div *ngIf="despues.length > 0" class="row despues">
+                <h1>Después</h1>
+                <div *ngFor="let i of despues" class="col-12">
+                    <i class="fas fa-times text-danger fa-2x borrar" (click)="borrar(i)"></i>
+                    <img [src]="i.url" class="fotoAuto">
+                </div>
+            </div>
+
+            <div class="contenedor">
+                <div class="contenedor_formulario">
+                  <h5 class="subir">Subir foto despues</h5>
+                 
+                  <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo('despues')">
                         <input class="form-control" type="file" formControlName="archivo" (change)="cambioArchivo($event)">
                         <span class="file-name">
                           {{ mensajeArchivo }}
@@ -116,7 +165,7 @@
 
               </div>
 
-            
+
         </div>
    
     

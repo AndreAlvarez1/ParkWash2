@@ -22,6 +22,10 @@ import { LoadingComponent } from './shared/loading/loading.component';
 import { WashesComponent } from './components/team/washes/washes.component';
 import { WashComponent } from './components/team/wash/wash.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { InicioComponent } from './components/user/inicio/inicio.component';
+import { LavadosComponent } from './components/user/lavados/lavados.component';
+import { PagosComponent } from './components/user/pagos/pagos.component';
+import { LavadoComponent } from './components/user/lavado/lavado.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { FilterPipe } from './pipes/filter.pipe';
     LoadingComponent,
     WashesComponent,
     WashComponent,
-    FilterPipe
+    FilterPipe,
+    InicioComponent,
+    LavadosComponent,
+    PagosComponent,
+    LavadoComponent
     ],
   imports: [
     BrowserModule,

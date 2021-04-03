@@ -1,0 +1,36 @@
+.estado {
+    padding:20px
+}
+
+.estado h1 {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+.infoLavado{
+    padding:20px;
+}
+
+.infoLavado h1{
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.infoLavado h2{
+    font-size: 1em;
+
+}
+
+.infoLavado span{
+    font-weight: 700;
+}
+
+.fotoAuto{
+    width: 600px;
+    border: 3px solid black;
+}
+
+.antes h1{
+    font-weight: 700;
+    font-size: 1.2em;
+}

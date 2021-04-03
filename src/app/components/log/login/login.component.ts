@@ -49,7 +49,11 @@ export class LoginComponent implements OnInit {
           console.log('usuarios', resp);
           const user = resp['datos'][0];
           localStorage.setItem('pkUser', JSON.stringify(user));
-           this.router.navigateByUrl('/user/perfil');
+          if (user.level === 1){
+            this.router.navigateByUrl('/user/inicio');
+          } else {
+            this.router.navigateByUrl('/user/perfil');
+          }
         }, err =>{ console.log('error', err)});
   }
 

@@ -9,6 +9,11 @@
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
     <div class="menu-list">
         <ul id="menu-content" class="menu-content collapse out">
+            <li *ngIf="user.level === 1" routerLink="/user/inicio">
+                <a class="nav-link">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+            </li>
             <li routerLink="/user/perfil">
                 <a class="nav-link">
                     <i class="fas fa-user"></i> Perfil
@@ -18,11 +23,16 @@
             <!-- CLIENTES -->
           <div *ngIf="user.level === 1">
 
+              <li routerLink="/user/lavados">
+                <a class="nav-link" routerLink="/user/lavados">
+                    <i class="fas fa-hand-sparkles"></i> Lavados
+                </a>
+            </li>
               <li routerLink="/user/autos">
                 <a class="nav-link" routerLink="/user/cars">
                     <i class="fas fa-car"></i> Mis Vehiculos
                 </a>
-            </li>
+             </li>
         </div>
           
         <!-- Lavadores -->

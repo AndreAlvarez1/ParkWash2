@@ -68,7 +68,7 @@ export class RegistroComponent implements OnInit {
               .subscribe( resp => {
                 console.log('usuario guardado en bd', resp);
                 this.exito('Datos guardados con éxito');
-                this.router.navigateByUrl('/user/perfil');
+                this.router.navigateByUrl('/user/inicio');
               });
   }
 

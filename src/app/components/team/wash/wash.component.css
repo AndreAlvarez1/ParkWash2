@@ -47,8 +47,17 @@
     font-weight: 700;
 }
 
+.borrar{
+    position: absolute;
+    right: 20px;}
 
 /* SUBIR */
 .fotoAuto {
     width: 100%;
+}
+
+.subir {
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-top:15px;
 }
