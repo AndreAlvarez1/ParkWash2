@@ -7,8 +7,9 @@ import { Injectable } from '@angular/core';
 export class ConectorService {
 
 
-  public url = 'http://localhost';
-  public port = 3063;
+  // public url = 'http://localhost';
+  public url = 'http://node.clubgournet.cl'
+  public port = 9069;
 
   constructor(private http:HttpClient) { }
 
