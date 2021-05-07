@@ -36,6 +36,10 @@ export class LavadosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  info(){
+    console.log('info');
+  }
+
   getWashes(){
     this.loading = true;
     this.conex.getDatos(`/washes/${this.firstDay}/${this.lastDay}/${this.user.id}`)

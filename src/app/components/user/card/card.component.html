@@ -1,0 +1,68 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<app-sidebar></app-sidebar>
+
+<div class="contenedor2">
+
+<div class="row cabecera shadow " style="margin:0">
+    <div class="col-12">
+        <h1 (click)="info()"><i class="fas fa-car"></i> Tarjeta de crédito</h1>
+    </div>
+</div>
+
+<div class="row" style="margin:0">
+    <div class="col-12 texto">
+        <h1>Al ingresar una nueva tarjeta, acepto las siguientes condiciones:</h1>
+        <p>
+            <span>Primero</span>
+            En consideración a que he acordado con Parkwash SpA el pago de un bien o servicio o un aporte voluntario al mismo, por el presente instrumento instruyo expresamente a Parkwash SpA para que por intermedio de Transbank S.A. se cargue en mi Tarjeta de Crédito arriba individualizada, o cualquiera otra que la sustituya o reemplace, para que sean pagadas a Parkwash SpA, asumiendo además el compromiso de mantener mi tarjeta vigente y con el crédito suficiente para cubrir los cargos. En caso de sustitución, revocación, vencimiento o reemplazo de la tarjeta de crédito, me obligo a informar por escrito a Parkwash SpA de dicha situación, no obstante lo cual autorizo a Transbank S.A. o al Emisor de la tarjeta a informar a Parkwash SpA la nueva fecha de vencimiento, el nuevo número y/o tarjeta asignada y que los cargos respectivos se efectúen en ella. A su vez, en caso de no detectarse una tarjeta que reemplace o sustituya a la arriba indicada, autorizo a Transbank S.A. a cargar las cantidades señaladas en cualquier otra tarjeta de crédito emitida a mi nombre y operada por tal empresa y a informar dicha tarjeta a Parkwash SpA.
+        </p>
+
+        <p>
+            <span>Segundo</span>
+            Parkwash SpA determinará mes a mes el valor a cobrar a cada cliente registrado, según los lavados efectuados el mes anterior y los precios vigentes. Se enviará un detalle de los lavados y el monto a cobrar 1 semana antes del cobro a cada cliente, para que este lo revise y objete en caso que corresponda.
+        </p>
+      
+        <p>
+            <span>Tercero</span>
+            Acepto que Parkwash SpA enviará a Transbank S.A. periódicamente la información de cobro correspondiente, liberando a Transbank S.A. si ello no ocurriera. La relación contractual entre Parkwash SpA y el suscrito, es exclusiva entre ambas partes, por lo que libero a Transbank S.A. de cualquier obligación al respecto. En el evento que Transbank S.A., por cualquier circunstancia, no efectuara algún cargo en mi Tarjeta de Crédito Parkwash SpA deberá procurarse el pago directamente. Además, si de ello se me produjera o llegara a producir algún daño o perjuicio, especialmente relacionado con falta de coberturas o caducidades de contratos, libero expresamente de toda responsabilidad a Transbank S.A. y renuncio a cualquier acción en contra de esta última derivada de esta instrucción.        
+        </p>
+        <p>
+            <span>Cuarto</span>
+            El presente instrumento continuará vigente hasta que yo la revoque. No obstante, la presente instrucción expirará automáticamente en caso de término del contrato entre Parkwash SpA y Transbank S.A.
+        </p>
+        <p>
+            <span>Quinto</span>
+            Por el presente acto, declaro que no obstante la presente instrucción, mi obligación de pago a Parkwash SpA es y será siempre responsabilidad del suscrito.
+        </p>
+    </div>
+</div>
+
+
+
+   <form (ngSubmit)="guardarCard(f)" #f="ngForm" class="row validate-form" style="margin-bottom: 60px;">
+            
+            <div class="col-1 offset-1  col-md-1 offset-md-2 text-right">
+                <i  *ngIf="ccNumber[0] === '3' " class="fab fa-cc-amex fa-2x"></i>
+                <i  *ngIf="ccNumber[0] === '4' " class="fab fa-cc-visa fa-2x"></i>
+                <i  *ngIf="ccNumber[0] === '5' " class="fab fa-cc-mastercard fa-2x"></i>
+                <!-- <i  *ngIf="ccNumber[0] === 3 " class="fab fa-cc-diners-club"></i> -->
+            </div>
+
+            <div class="col-9 col-md-6  campo">
+                <input class="form-control" type="text" name="card" required ngModel [(ngModel)]="ccNumber" placeholder="xxxx xxxx xxxx xxxx" (keyup)="formatoTarjeta()">
+            </div>
+
+            <div class="col-10 offset-1 col-md-6 offset-md-3 ">
+                <button class="btn btn-success btn-block" style="margin-bottom:10px" type="submit">
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+
+
+
+
+
+</div>

@@ -81,9 +81,20 @@
 
     <div class="row">
         <div class="col-12">
-            <h1>Tarjeta</h1>
+            <h1>Tarjetas</h1>
+            
+            <div *ngIf="cards.length > 0 " class="row">
+                <div *ngFor="let c of cards" class="col-12">
+                    <p>XXXX XXXX XXXX XXXX {{c.short}}</p>
+                </div>
+            </div>
+
+            <button class="btn btn-primary"  routerLink = "/user/card">Añadir Tarjeta</button>
+
+            <!-- 
             <button class="btn btn-primary" (click)="webpay(123)">Webpay</button>
             <button class="btn btn-primary" (click)="inscription()">Inscription</button>
+            -->
         </div>
     </div>
 
