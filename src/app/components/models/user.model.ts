@@ -12,6 +12,7 @@ export class UserModel {
    lng!: number;
    status: number ;
    level: number;
+   notToday: number;
    password: string;
    password2: string;
 
@@ -29,6 +30,7 @@ export class UserModel {
    this.lng = 0;
    this.status = 0;
    this.level = 1;
+   this.notToday = 9;
    this.password = '';
    this.password2 = '';
   }

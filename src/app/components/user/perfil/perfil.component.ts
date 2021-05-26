@@ -21,7 +21,7 @@ export class PerfilComponent implements OnInit {
   cars: any[] = [];
   car: CarModel = new CarModel();
   plans: any[] = [];
-
+  
   user: UserModel = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
 
   modalVehiculo = false;
@@ -41,6 +41,7 @@ lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getM
   constructor(private auth:AuthService,
               private conex: ConectorService,
               private router: Router) {
+                
     console.log('user', this.user);
     this.getCars();
     this.getCards();
@@ -53,8 +54,6 @@ lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getM
   ngOnInit(): void {
     console.log('firstday', this.firstDay)
     console.log('last', this.lastDay);
-
-
   }
   
 
@@ -62,11 +61,14 @@ lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getM
     // console.log('recintos', this.recintos);
     console.log('car', this.car);
     console.log('plans', this.plans);
+    const hoy = new Date();
 
+    console.log('hoy', hoy.getDay())
   }
 
  getCards(){
-   this.conex.getDatos('/cards/' + this.user.id) .subscribe( (resp:any) => { this.cards = resp['datos'] });
+   this.conex.getDatos('/cards/' + this.user.id) 
+              .subscribe( (resp:any) => { this.cards = resp['datos'], console.log('cards', this.cards)});
  }
 
   getCars(){

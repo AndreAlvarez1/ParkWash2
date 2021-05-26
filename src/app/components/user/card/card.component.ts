@@ -20,15 +20,28 @@ export class CardComponent implements OnInit {
   firstDay = this.conex.formatoSQL(new Date());
   // firstDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth(), 1));
 
+  cards: any[] = [];
+  card: CardModel = new CardModel();
+
 
   constructor(private conex: ConectorService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.getCards();
   }
 
   info(){
     console.log('info');
+  }
+
+  getCards(){
+    this.conex.getDatos('/cards/' + this.user.id) 
+               .subscribe( (resp:any) => { 
+                        console.log('res',resp['datos'])
+                        this.cards = resp['datos'].filter( (c:any) => c.status !== 0 ), 
+                        this.loading = false
+                      });
   }
 
   
@@ -91,10 +104,30 @@ grabarTarjeta(card: CardModel){
   this.conex.guardarDato('/post/card/insert', card)
     .subscribe( (resp:any) => {
       console.log('guardado con exito');
-      this.router.navigateByUrl('/user/perfil');
+      if (this.cards.length < 1){
+        this.router.navigateByUrl('/user/perfil');
+      } else {
+        this.actualizarCards()
+      }
     },err =>{ console.log('error')})
 }
 
+
+actualizarCards(){
+  this.loading = true;
+  for (let c of this.cards){
+    c.active = 0;
+      this.conex.guardarDato('/post/card/update', c)
+          .subscribe( resp => { 
+              console.log('grabé', resp);
+            }, err => {
+              console.log('err', err);
+            })
+  }
+  this.loading = false;
+  this.router.navigateByUrl('/user/perfil');
+
+}
 
 
 

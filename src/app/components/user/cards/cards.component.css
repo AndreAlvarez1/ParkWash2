@@ -1,0 +1,24 @@
+.auto span {
+    font-weight: 700;
+}
+.ico {
+    font-size:1em;
+    margin-left:10px;
+}
+
+.icoLinea {
+    display: inline;
+}
+
+h5{
+    padding-top: 4px;
+    font-size: 0.8em;
+    display: inline;
+
+}
+
+.fondo_tarj {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: beige;
+}

@@ -14,7 +14,7 @@
 
             <div class="row" >
                 <div class="col-12">
-                    <h3>Tus Próximos lavados</h3>
+                    <h3 *ngIf="washes.length > 0">Tus Próximos lavados</h3>
                     <div *ngFor="let w of washes" class="row lavado shadow" (click)="abrirLavado(w)">
                         <div class="col-12">
                             <h1>{{w.marca}} {{w.modelo}}</h1>
@@ -33,7 +33,7 @@
         </div>
 
     <div class="col-12 col-md-6">
-        <p>Publi</p>
+        <!-- <p>Publi</p> -->
     </div>
 </div>
 </div>

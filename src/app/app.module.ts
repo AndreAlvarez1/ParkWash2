@@ -27,6 +27,7 @@ import { LavadosComponent } from './components/user/lavados/lavados.component';
 import { PagosComponent } from './components/user/pagos/pagos.component';
 import { LavadoComponent } from './components/user/lavado/lavado.component';
 import { CardComponent } from './components/user/card/card.component';
+import { CardsComponent } from './components/user/cards/cards.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CardComponent } from './components/user/card/card.component';
     LavadosComponent,
     PagosComponent,
     LavadoComponent,
-    CardComponent
+    CardComponent,
+    CardsComponent
     ],
   imports: [
     BrowserModule,

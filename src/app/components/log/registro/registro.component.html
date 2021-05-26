@@ -46,6 +46,9 @@
             </div>
             
             
+         
+
+            
             <div class="col-10 offset-1 col-md-5 offset-md-1 campo" data-validate="Password is required">
                 <span *ngIf="form.submitted && form.controls['password'].errors" class="error">Debes ingresar un password por favor</span>
                 <input class="form-control" type="password" name="password" required minlength="6" [(ngModel)]="usuario.password" placeholder="Password">
@@ -54,6 +57,17 @@
                 <span *ngIf="form.submitted && form.controls['password2'].errors" class="error">Confirma tu password porfavor</span>
                 <input class="form-control" type="password" name="password2" required minlength="6" [(ngModel)]="usuario.password2" placeholder="Password">
             </div>
+
+            <div class="col-10 offset-1 col-md-5 offset-md-1 campo">
+                <label>¿Hay algún día de la semana que no puedas dejar el auto para que te lo lavemos?</label>
+                <select class="form-control" [(ngModel)]="usuario.notToday" [ngModelOptions]="{standalone: true}" (change)="selectDia($any($event.target).value)" >
+                    <option *ngFor="let w of week" [value]='w.id'>{{w.day}}</option>
+                </select>   
+            </div>
+            <div class="col-10 offset-1 col-md-5 offset-md-0 campo">
+       
+            </div>
+            
 
             <div class="col-10 offset-1 col-md-6 offset-md-3 ">
                 <button class="btn btn-outline-light btn-block" style="margin-bottom:10px" type="submit">
