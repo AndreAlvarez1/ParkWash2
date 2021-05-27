@@ -8,18 +8,23 @@ export class ConectorService {
 
 
   // public url = 'http://localhost';
-  public url = 'http://node.clubgournet.cl'
+  // public url = 'http://node.clubgournet.cl'
+  public url = 'https://loyal-conduit-314919.ue.r.appspot.com/'
+  // public url = 'http://api.parkwash.cl'
+
   public port = 9069;
 
   constructor(private http:HttpClient) { }
 
 
   getDatos( ruta:string ) {
-    return this.http.get( this.url + ':' + this.port + ruta );
+    return this.http.get( this.url + ruta );
+    // return this.http.get( this.url + ':' + this.port + ruta );
  }
 
  guardarDato(ruta:string, body:any) {
-  return this.http.post( this.url + ':' + this.port + ruta, body );
+  return this.http.post( this.url + ruta, body );
+  // return this.http.post( this.url + ':' + this.port + ruta, body );
 }
 
 
