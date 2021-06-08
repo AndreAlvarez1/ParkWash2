@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ConectorService {
 
 
-  // public url = 'http://localhost';
+  // public url = 'http://localhost:9069';
   // public url = 'http://node.clubgournet.cl'
   public url = 'https://loyal-conduit-314919.ue.r.appspot.com/'
   // public url = 'http://api.parkwash.cl'
