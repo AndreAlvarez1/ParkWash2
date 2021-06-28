@@ -7,10 +7,10 @@ import { Injectable } from '@angular/core';
 export class ConectorService {
 
 
-  // public url = 'http://localhost:9069';
-  // public url = 'http://node.clubgournet.cl'
-  public url = 'https://loyal-conduit-314919.ue.r.appspot.com/'
-  // public url = 'http://api.parkwash.cl'
+  public url = 'http://localhost:9069';
+  // public url = 'https://loyal-conduit-314919.ue.r.appspot.com/'
+
+
 
   public port = 9069;
 
@@ -19,12 +19,10 @@ export class ConectorService {
 
   getDatos( ruta:string ) {
     return this.http.get( this.url + ruta );
-    // return this.http.get( this.url + ':' + this.port + ruta );
  }
 
  guardarDato(ruta:string, body:any) {
   return this.http.post( this.url + ruta, body );
-  // return this.http.post( this.url + ':' + this.port + ruta, body );
 }
 
 

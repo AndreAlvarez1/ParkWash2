@@ -88,7 +88,8 @@ export class WashComponent implements OnInit {
                 console.log('resp', resp)
                 this.recintos = resp['datos'];
                 this.getTeam()
-                // if( this.id !== 'nuevo'){
+                this.selectRecinto(this.recintos[0].id)
+                // if( this.id == 'nuevo'){
                 //   this.recinto = this.recintos.find( (r:any) =>{ r.id === this.wash.recintoId });
                 // }
               });
@@ -117,8 +118,9 @@ export class WashComponent implements OnInit {
   }
 
   selectRecinto(value: any){
+    console.log('recintos', this.recintos)
     console.log('recinto', value)
-    const existe = this.recintos.find( (res:any) => res.nombre === value);
+    const existe = this.recintos.find( (res:any) => res.id == value);
     this.wash.recintoId = existe.id;
     this.getCars(this.wash.recintoId);
   }
@@ -145,6 +147,13 @@ export class WashComponent implements OnInit {
   
   guardarLavado(tarea:string){
     console.log('guardar', this.wash);
+    const dia = new Date(this.wash.washDate).getDay()
+    // const notToday = new Date(this.wash.washDate).getDay()
+    
+    if (dia === this.car.notToday ){
+      this.notEseDia('el cliente bloqueo ese dia para lavados, buscar otra fecha por favor')
+      return;
+    }
 
     if (this.wash.washerId === 0 || this.wash.carId === 0 || this.wash.recintoId === 0 || this.wash.washDate === ''){
       console.log('faltan datos');
@@ -315,6 +324,17 @@ error(error: string) {
   // this.conex.sonido('exito.mp3');
   Swal.fire({
     title: 'Cuec',
+    text: error,
+    icon: 'error',
+    timer: 3000,
+    timerProgressBar: true
+  });
+}
+
+notEseDia(error: string) {
+  // this.conex.sonido('exito.mp3');
+  Swal.fire({
+    title: 'No se puede agendar para ese dia',
     text: error,
     icon: 'error',
     timer: 3000,

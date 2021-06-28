@@ -65,6 +65,16 @@
 
         </div>
     </div>
+    <div *ngIf="despues.length > 0" class="row antes text-center">
+        <div class="col-12">
+
+            <h1>Despues</h1>
+            <div *ngFor="let i of despues">
+                <img [src]="i.url" class="fotoAuto">
+            </div>
+
+        </div>
+    </div>
 
 </div>    
 

@@ -23,6 +23,9 @@ export class CarsComponent implements OnInit {
   agregar = false;
   update = false;
 
+  week = [ {id:2, day: 'Martes'},{id:3, day: 'Miércoles'},{id:5, day: 'Viernes'},{id:9, day: 'No, pueden lavar cualquier día de la semana'},]
+
+
   constructor(private conex: ConectorService) { 
       console.log('cars', this.cars);
       this.getCars();
@@ -76,6 +79,12 @@ export class CarsComponent implements OnInit {
     this.recinto = this.recintos.find(rec => rec.nombre === r);
     console.log('recinto', this.recinto );
     this.car.recintoId = this.recinto.id;
+  }
+
+  selectDia(valor:number){
+    console.log('valor', valor);
+    console.log('this.car', this.car)
+
   }
 
   guardar(f: NgForm) {
