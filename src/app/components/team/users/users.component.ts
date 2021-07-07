@@ -16,11 +16,20 @@ export class UsersComponent implements OnInit {
   user: UserModel = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
   usersAll: any[] = [];
   users: any[] = [];
+  recintos: any[] = [];
+  plans: any[] = [];
+
+  userCars: any[] = [];
+  userCards: any[] = [];
+  loading2 = false;
+
 
   modalUsuario = false;
 
   constructor(private conex:ConectorService) { 
-    this.getUsers();
+ 
+    this.getRecintos();
+    this.getPlans();
 
   }
 
@@ -29,6 +38,7 @@ export class UsersComponent implements OnInit {
 
   info(){
     console.log('users', this.users)
+    console.log('recintos', this.recintos)
   }
 
   getUsers(){
@@ -39,6 +49,23 @@ export class UsersComponent implements OnInit {
                 this.usersAll = resp['datos'].filter( (u:any) => u.status > 0);
                 this.users = this.usersAll;
                 this.loading = false;
+              });
+  }
+ 
+  getRecintos(){
+    this.conex.getDatos(`/recintos`)
+              .subscribe( (resp:any) => { 
+                this.getUsers();
+                console.log('recintos', resp)
+                this.recintos = resp['datos'].filter( (u:any) => u.status > 0);
+              });
+  }
+  
+  getPlans(){
+    this.conex.getDatos(`/plans`)
+              .subscribe( (resp:any) => { 
+                console.log('plans', resp)
+                this.plans = resp['datos'].filter( (u:any) => u.status > 0);
               });
   }
 
@@ -56,7 +83,55 @@ export class UsersComponent implements OnInit {
   selectUser(usuario: UserModel){
     this.modalUsuario = true;
     this.user = usuario;
+    if ( usuario.level === 1){
+      this.loading2 = true;
+      this.getCars(usuario.id)
+    }
     console.log('select usuarios', this.user);
+  }
+
+  getCars(id:any){
+    this.userCars = [];
+    this.conex.getDatos('/cars/' + id )
+              .subscribe( (resp:any) => { 
+                  console.log('cars', resp);
+                  this.getCards(id)
+                  if (resp['datos'].length > 0){
+                    for( let c of resp['datos']){
+                      console.log('c', c);
+                      const existeRecinto = this.recintos.find( (rec:any) => rec.id === c.recintoId)
+                      console.log('existe reciento', existeRecinto)
+                      c.recintoName = existeRecinto.nombre
+                      
+                      const existePlan = this.plans.find( (pla:any) => pla.id === c.planId)
+                      if (existePlan){
+                        console.log('existe plan', existePlan)
+                        c.planName = existePlan.nombre
+                      } else {
+                        c.planName = 'pendiente'
+
+                      }
+
+                      this.userCars.push(c)
+                    }
+                  }
+                })
+  }
+  
+  getCards(id:any){
+    this.userCards = [];
+    this.conex.getDatos('/cards/' + id )
+              .subscribe( (resp:any) => { 
+                  this.loading2 = false;
+                  console.log('cards', resp);
+                  if (resp['datos'].length > 0){
+                   for( let c of resp['datos']){
+                     if (c.status > 0){
+                      this.userCards.push(c)
+                     }
+                   }
+                  }
+                })
   }
 
 
@@ -74,6 +149,22 @@ export class UsersComponent implements OnInit {
       this.modalUsuario = false;
 
     });
+  }
+
+  formCliente(f: NgForm) {
+    if (!f.valid){
+      console.log('error formulario incompleto');
+      return;
+    }
+
+    // console.log('guardaré usuario', this.user);
+    // this.conex.guardarDato('/post/usuarios/update', this.user)
+    // .subscribe( resp => {
+    //   console.log('usuario guardado en bd', resp);
+    //   this.exito('Datos guardados con éxito');
+    //   this.modalUsuario = false;
+
+    // });
   }
 
   seguroBorrar(){

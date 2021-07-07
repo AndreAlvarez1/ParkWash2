@@ -104,11 +104,8 @@
 
 
 <div *ngIf="modalUsuario === true" class="row fondoModif animated fadeIn" style="margin:0">
-    <div class="col-7 offset-5 animated slideInRigth">
-       
-
-        
-        <div class="row f_calipso2 pad20 mod">
+    <div class="col-12 col-md-5 animated slideInLeft">
+         <div class="row f_calipso2 pad20 mod">
             <div class="col-10">
                 <h1>Editar Usuario</h1>
             </div>
@@ -182,4 +179,92 @@
    
 
     </div>
+
+
+    <div class="col-12 col-md-5 offset-md-2 animated slideInLeft">
+        <div class="row f_calipso2 pad20 mod">
+           <div class="col-10">
+               <h1>Datos Cliente</h1>
+           </div>
+           <!-- <div class="col-2">
+               <i class="fas fa-times fa-2x" (click)="modalUsuario = false "></i>
+           </div> -->
+       </div>
+
+       <div class="row pad20 f_blanco">
+        <div class="col-12">
+            <h1 class="tituloModal">Vehiculos</h1>
+
+              <div *ngFor="let car of userCars; let i = index" class="accordion" >
+
+                <div class="row auto pointer animated fadeIn faster" data-toggle="collapse" [attr.data-target]="'#' + 'P' + car.id+i" >
+                    <div class="col-4">
+                        <p># {{i}} | {{car.marca}} - {{car.modelo}}</p>
+                    </div>
+                    <div class="col-8 text-right">
+                        <p>{{car.recintoName}}  <i class="fas fa-eye"></i></p>
+                    </div>
+
+                </div>
+
+
+                <div  class="collapse" aria-labelledby="headingOne " [attr.id]="'P' + car.id+i">
+                    <div class="row opciones" id="collapseExample">
+
+                  <div class="col-12 infoAuto">
+                      <h2>Info</h2>
+                      <p><span>Patente:</span> {{car.patente}}</p>
+                      <p><span>Tipo:</span> {{car.tipo}}</p>
+                      <p><span>Color:</span> {{car.tipo}}</p>
+                      <p><span>Plan:</span> {{car.planName}}</p>
+                      <p><span>Registrado el:</span> {{car.reg_date | date}}</p>
+                      <p *ngIf="car.notToday === 2" ><span>No lavar:</span> Martes</p>
+                      <p *ngIf="car.notToday === 3" ><span>No lavar:</span> Miércoles</p>
+                      <p *ngIf="car.notToday === 5" ><span>No lavar:</span> Viernes</p>
+                      <p *ngIf="car.notToday === 9" > Sin Restricción de dia para lavado</p>
+                  </div>
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <h1 class="tituloModal">Cards</h1>
+
+            <div *ngIf="userCards.length > 0">
+                <div *ngFor="let card of userCards" class="row">
+                    <div class="col-12">
+                        <p class="tarjetita" *ngIf="card.active === 1"> {{card.short}} | <i class="fas fa-circle text-success"></i></p>
+                        <p class="tarjetita" *ngIf="card.active === 0"> {{card.short}} | <i class="fas fa-circle text-danger"></i></p>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="userCards.length < 1">
+                <p>El cliente no ha asociado ninguna tarjeta aún</p>
+            </div>
+                
+          
+        </div>
+       </div>
+
+       <!-- color: "Gris Bufalo"
+id: 20
+marca: "Suzuki"
+modelo: "Vitara"
+notToday: 2
+patente: "LKVR84"
+planId: 3
+recintoId: 1
+reg_date: "2021-06-23T11:16:26.000Z"
+size: 2
+status: 1
+tipo: "SUV - Jeep"
+userId: 1 -->
+  
+
+   </div>
 </div>
