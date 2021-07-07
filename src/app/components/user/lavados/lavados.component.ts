@@ -23,6 +23,7 @@ export class LavadosComponent implements OnInit {
   searchString = '';
 
   user: UserModel = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
+
   washesAll: any[] = [];
   washes: any[] = [];
 
@@ -37,12 +38,16 @@ export class LavadosComponent implements OnInit {
   }
 
   info(){
-    console.log('washes', this.washes);
+    console.log('info');
   }
 
   getWashes(){
+
+    console.log('first', this.firstDay)
+    console.log('last', this.lastDay)
+
     this.loading = true;
-    this.conex.getDatos(`/washes/${this.firstDay}/${this.lastDay}/${this.user.id}`)
+    this.conex.getDatos(`/washesXuser/${this.firstDay}/${this.lastDay}/${this.user.id}`)
               .subscribe( (resp:any) => { 
                 console.log('washes', resp)
                 this.washesAll = resp['datos'];

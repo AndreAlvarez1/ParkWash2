@@ -7,18 +7,22 @@ import { Injectable } from '@angular/core';
 export class ConectorService {
 
 
-  public url = 'http://localhost';
-  public port = 3063;
+  public url = 'http://localhost:9069';
+  // public url = 'https://loyal-conduit-314919.ue.r.appspot.com/'
+
+
+
+  public port = 9069;
 
   constructor(private http:HttpClient) { }
 
 
   getDatos( ruta:string ) {
-    return this.http.get( this.url + ':' + this.port + ruta );
+    return this.http.get( this.url + ruta );
  }
 
  guardarDato(ruta:string, body:any) {
-  return this.http.post( this.url + ':' + this.port + ruta, body );
+  return this.http.post( this.url + ruta, body );
 }
 
 

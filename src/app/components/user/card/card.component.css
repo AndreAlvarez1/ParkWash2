@@ -1,0 +1,11 @@
+.texto {
+    padding:40px
+}
+
+.texto h1{
+    font-weight: 700;
+}
+
+.texto p{
+    text-align: justify;
+}

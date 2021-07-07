@@ -1,52 +1,40 @@
-<app-loading *ngIf="loading"></app-loading>
+<app-loading *ngIf="loading" style="margin:0"></app-loading>
 
 <app-sidebar></app-sidebar>
 
-<div class="contenedor2">
+<div *ngIf="!loading" class="contenedor2">
 
-<div class="row cabecera shadow">
-    <div class="col-12">
-        <h1 (click)="info()"><i class="fas fa-car"></i> Mis Vehiculos</h1>
+    <div class="row cabecera shadow">
+        <div class="col-12">
+            <h1 (click)="info()">Mis Tarjetas</h1>
+        </div>
     </div>
-</div>
 
 
-<div *ngIf="cars.length < 1" class="row text-center">
-    <div class="col-12">
-        <p>Aún no has registrado ningún vehiculo</p>
+    <div *ngIf="cards.length > 0" class="row fondo_tarj">
+        <div class="col-10 offset-1 col-md-8 offset-md-2 " >
+        
+            <div *ngFor="let c of cards; index as i" class="row auto text-center">
+            <div class="col-6 text-left">
+                <p><span>Tarjeta {{ i + 1 }}: </span> XXXX XXXX XXXX {{c.short}} 
+                    <i *ngIf="c.active == 1" class="fas fa-circle text-success ico"></i> 
+                    <i *ngIf="c.active == 0" class="fas fa-circle text-danger ico"></i> 
+                </p>
+                
+            </div>
+            <div *ngIf="c.active == 0" class="col-6 text-left">
+                <h5 (click)="cambiar(c, 'borrar')" class="pointer"> <i  class="fas fa-trash icoLinea text-danger pointer"></i>Borrar</h5>
+                <h5 (click)="cambiar(c, 'update')" class="auto text-primary pointer">  | Activar esta tarjeta</h5>
+                </div>
+        </div>
+        </div>
     </div>
-</div>
 
-<div *ngIf="cars.length > 0" class="row mt-2">
-    <div class="col-10 offset-1 col-md-6 offset-md-3">
-       
-        <div *ngFor="let c of cars" class="row auto">
-           <div class="col-10">
-               <h2>{{c.modelo}}</h2>
-               <p>Marca: {{c.marca}}</p>
-               <p>color: {{c.color}}</p>
-               <p>patente: {{c.patente}}</p>
-           </div>
-           <div class="col-2">
-               <h2 (click)="editar(c)" ><i class="fas fa-pencil-alt ico"></i></h2>
-               <h2 (click)="borrar(c)" ><i class="fas fa-trash ico"></i></h2>
-           </div>
-       </div>
+    <div *ngIf="cards.length == 1" class="row text-center mt-2">
+        <div class="col-12">
+            <button class="btn btn-primary" routerLink = '/user/card'>Agregar una tarjeta</button>
+        </div>
     </div>
-</div>
-
-<div *ngIf="agregar" class="row text-center mt-2">
-    <div class="col-12">
-        <button class="btn btn-primary" (click)="modalVehiculo = true">Agregar un vehiculo</button>
-    </div>
-</div>
-
-<div *ngIf="!agregar" class="row text-center mt-2">
-    <div class="col-10 offset-1 col-md-6 offset-md-3">
-        <!-- <p>Para poder agregar más vehiculos te invitamos a hacer un upgrade como usuario Premium</p> -->
-    </div>
-</div>
-
 
 </div>
 
@@ -54,7 +42,7 @@
 
 
 
-
+<!-- 
 <div *ngIf="modalVehiculo" class="row fondoModif animated fadeIn">
     <div class="col-12 col-md-4 offset-md-8 animated slideInRight modalForm">
        
@@ -113,15 +101,6 @@
                             <option *ngFor="let r of recintos" [ngValue]='r.nombre'>{{r.nombre}}</option>
                          </select>
                     </div>
-
-                    <div class="col-12 mb-3">
-                        <label>¿Hay algún día de estos que no puedas dejar el auto para que te lo lavemos?</label>
-                        <select class="form-control" [(ngModel)]="car.notToday" [ngModelOptions]="{standalone: true}" (change)="selectDia($any($event.target).value)" >
-                            <option *ngFor="let w of week" [value]='w.id'>{{w.day}}</option>
-                        </select>   
-                    </div>
-
-          
                     
                 
 
@@ -134,4 +113,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

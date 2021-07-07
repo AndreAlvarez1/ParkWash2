@@ -27,16 +27,18 @@
                    </select>
 
                    <label>Escoge un Recinto</label>
-                   <select class="form-control" name="recinto" (change)="selectRecinto($any($event.target).value)">
+                   <!-- <select class="form-control" name="recinto" (change)="selectRecinto($any($event.target).value)"> -->
+                   <select class="form-control" name="recinto" [(ngModel)]="wash.recintoId" [ngModelOptions]="{standalone: true}" (change)="selectRecinto($any($event.target).value)">
                        <option *ngIf="wash.recintoId === 0 " >Selecciona un recinto</option>    
-                       <option *ngFor="let r of recintos" [ngValue]='r.nombre'>{{r.nombre}}</option>
+                       <option *ngFor="let r of recintos" [value] ='r.id'>{{r.nombre}}</option>
                     </select>  
 
+                    
                     <hr>
 
                     <div *ngIf="wash.recintoId > 0">
 
-                    <button *ngIf="car.id < 1 "class="btn btn-warning btn-block" (click)="modalAutos = true" >Seleccionar Auto</button>
+                    <button *ngIf="car.id < 1"class="btn btn-warning btn-block" (click)="modalAutos = true" >Seleccionar Auto</button>
 
                     <div *ngIf="car.id > 0" class = "row auto">
                         <div class="col-12">

@@ -15,6 +15,8 @@ export class CarModel {
     firstName: string;
     lastName: string;
     description: string;
+    notToday: number;
+
 
    constructor() {
     this.id = 0;
@@ -31,7 +33,9 @@ export class CarModel {
     this.planId = 0;
     this.firstName = '';
     this.lastName = '';
-    this.description = '';
+    this.description = '' ;
+    this.notToday = 9 ;
+
    }
 
 }

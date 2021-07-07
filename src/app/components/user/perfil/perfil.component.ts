@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ConectorService } from 'src/app/services/conector.service';
 import Swal from 'sweetalert2';
 import { CarModel } from '../../models/car.model';
+import { CardModel } from '../../models/card.model';
 import { PlanModel } from '../../models/plan.model';
 import { RecintoModel } from '../../models/recinto.model';
 import { UserModel } from '../../models/user.model';
@@ -20,14 +21,17 @@ export class PerfilComponent implements OnInit {
   cars: any[] = [];
   car: CarModel = new CarModel();
   plans: any[] = [];
-
+  
   user: UserModel = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
+
   modalVehiculo = false;
   recinto: RecintoModel = new RecintoModel();
   agregar = false;
   update = false;
   washes: any[] = [];
 
+  cards: any[] = [];
+  card: CardModel = new CardModel();
 
 date = new Date();
 firstDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth(), 1));
@@ -37,7 +41,10 @@ lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getM
   constructor(private auth:AuthService,
               private conex: ConectorService,
               private router: Router) {
+                
+    console.log('user', this.user);
     this.getCars();
+    this.getCards();
     
                 if (this.user.level !== 1){
                   this.getWashes('Todos');
@@ -47,8 +54,6 @@ lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getM
   ngOnInit(): void {
     console.log('firstday', this.firstDay)
     console.log('last', this.lastDay);
-
-
   }
   
 
@@ -56,10 +61,15 @@ lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getM
     // console.log('recintos', this.recintos);
     console.log('car', this.car);
     console.log('plans', this.plans);
+    const hoy = new Date();
 
+    console.log('hoy', hoy.getDay())
   }
 
- 
+ getCards(){
+   this.conex.getDatos('/cards/' + this.user.id) 
+              .subscribe( (resp:any) => { this.cards = resp['datos'], console.log('cards', this.cards)});
+ }
 
   getCars(){
     console.log('user', this.user);

@@ -12,37 +12,63 @@
         </div>
     </div>
     
-    <div *ngIf="cars.length < 1" class="row cars text-center shadow" style="padding:20px">
-        <div class="col-12">
+    <div  class="row cars text-center shadow" style="padding:20px">
+       
+        <div *ngIf="cars.length < 1" class="col-6">
             <p>Aún no has registrado ningún vehiculo</p>
         </div>
-    </div>
+  
 
-    <div *ngIf="cars.length > 0" class="row cars">
-        <div class="col-2 text-right icono">
-            <i class="fas fa-car fa-4x"></i>
+        <div *ngIf="cars.length > 0" class="col-6 ">
+            <div class="row">
+                <div class="col-2 text-right icono">
+                    <i class="fas fa-car fa-4x"></i>
+                </div>
+                <div class="col-10">
+                    <div *ngFor="let c of cars" class="row auto">
+                       <div class="col-12 text-left">
+                           <h2>{{c.modelo}}</h2>
+                           <p>Marca: {{c.marca}}</p>
+                           <p>color: {{c.color}}</p>
+                           <p>patente: {{c.patente}}</p>
+                           <p>Tipo: {{c.tipo}}</p>
+                           <p  class="text-primary pointer" routerLink="/user/cars">Administrar Vehiculos</p>
+                       </div>
+                   </div>
+                </div>
+                
+            </div>
         </div>
-        <div class="col-10">
-           
-            <div *ngFor="let c of cars" class="row auto">
-               <div class="col-10">
-                   <h2>{{c.modelo}}</h2>
-                   <p>Marca: {{c.marca}}</p>
-                   <p>color: {{c.color}}</p>
-                   <p>patente: {{c.patente}}</p>
-                   <p>Tipo: {{c.tipo}}</p>
-               </div>
-               <div class="col-2 text-right">
-                   <h2 (click)="editar(c)" ><i class="fas fa-pencil-alt ico"></i></h2>
-                   <h2 (click)="borrar(c)" ><i class="fas fa-trash ico"></i></h2>
-               </div>
-           </div>
+
+        <div *ngIf="cards.length > 0" class="col-6 ">
+            <div class="row">
+                <div class="col-2 text-right icono">
+                    <i class="far fa-credit-card fa-4x"></i>
+                </div>
+                <div class="col-10 text-left">
+                    <div *ngIf="cards.length > 0 " class="row auto" style="padding-top:5%">
+                        <h2>Tarjeta de Crédito</h2>
+                        <div *ngFor="let c of cards" class="col-12">
+                            <p *ngIf="c.active === 1" style="margin-bottom:0">XXXX XXXX XXXX XXXX {{c.short}}</p>
+                        </div>
+                        <p  routerLink = "/user/cards" class="text-primary pointer">Administrar tarjetas</p>
+                    </div>
+                    <button *ngIf="cards.length < 1" class="btn btn-primary"  routerLink = "/user/cards">Añadir Tarjeta</button>
+                </div>
+
+            </div>
         </div>
+
+        <div  *ngIf="cards.length < 1" class="col-6" style="padding-top:10%">
+            <button class="btn btn-primary animated pulse infinite" routerLink = "/user/card">Añadir Tarjeta</button>
+
+        </div>
+
     </div>
 
     <div *ngIf="agregar" class="row text-center mt-2">
         <div class="col-12">
-            <button class="btn btn-primary" (click)="modalVehiculo = true">Agregar un vehiculo</button>
+            <button class="btn btn-primary" routerLink="/user/cars">Agregar un vehiculo</button>
         </div>
     </div>
     
@@ -77,15 +103,25 @@
     </div>
     
     <!--  -->
+<!-- 
 
+    <div class="row pad20">
+        <div class="col-12 ">
+            <h1>Tu Tarjeta</h1>
+            
+            <div *ngIf="cards.length > 0 " class="row">
+                <div *ngFor="let c of cards" class="col-12">
+                    <p *ngIf="c.active === 1">XXXX XXXX XXXX XXXX {{c.short}}</p>
+                </div>
+            </div>
 
-    <div class="row">
-        <div class="col-12">
-            <h1>Tarjeta</h1>
+            <button *ngIf="cards.length < 1" class="btn btn-primary"  routerLink = "/user/card">Añadir Tarjeta</button>
+            <p *ngIf="cards.length > 0" >Administrar tarjetas</p>
+
             <button class="btn btn-primary" (click)="webpay(123)">Webpay</button>
             <button class="btn btn-primary" (click)="inscription()">Inscription</button>
         </div>
-    </div>
+    </div> -->
 
 
 </div><!-- FIN CONTENEDOR-->

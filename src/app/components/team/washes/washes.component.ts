@@ -20,7 +20,6 @@ export class WashesComponent implements OnInit {
   searchString = '';
   firstDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth(), 1));
   lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth() + 2, 1));
-
   hoy = new Date().toLocaleString().slice(0, 19).replace('T', ' ');
 
   user: UserModel = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;

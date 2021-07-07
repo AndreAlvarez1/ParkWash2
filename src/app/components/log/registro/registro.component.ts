@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 export class RegistroComponent implements OnInit {
 
   usuario: UserModel = new UserModel();
+  // week = [ {id:1, day: 'Lunes'},{id:2, day: 'Martes'},{id:3, day: 'Miércoles'},{id:4, day: 'Jueves'},{id:5, day: 'Viernes'},{id:6, day: 'Sabado'},{id:0, day: 'Domingo'},{id:9, day: 'No, pueden lavar cualquier día de la semana'},]
+  week = [ {id:2, day: 'Martes'},{id:3, day: 'Miércoles'},{id:5, day: 'Viernes'},{id:9, day: 'No, pueden lavar cualquier día de la semana'},]
 
   constructor(private auth: AuthService,
               private conex: ConectorService,
@@ -33,6 +35,9 @@ export class RegistroComponent implements OnInit {
     console.log('gender', valor);
   }
 
+  selectDia(valor:number){
+    console.log('valor', valor);
+  }
 
   guardar(f: NgForm) {
     console.log('guardar usuario', this.usuario);
@@ -68,7 +73,7 @@ export class RegistroComponent implements OnInit {
               .subscribe( resp => {
                 console.log('usuario guardado en bd', resp);
                 this.exito('Datos guardados con éxito');
-                this.router.navigateByUrl('/user/inicio');
+                this.router.navigateByUrl('/logs/login');
               });
   }
 

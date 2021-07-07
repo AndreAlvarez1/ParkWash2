@@ -36,7 +36,7 @@
         </div>
           
         <!-- Lavadores -->
-          <div *ngIf="user.level === 0">
+          <div *ngIf="user.level === 0 || user.level === 2" >
 
               <li routerLink="/user/autos">
                 <a class="nav-link" routerLink="/team/washes">
@@ -50,6 +50,19 @@
             </li>
 
         </div>
+          
+        <div *ngIf="user.level === 2">
+
+              <li routerLink="/team/users">
+                <a class="nav-link" routerLink="/team/users">
+                    <i class="fas fa-user-friends"></i> Usuarios
+                </a>
+            </li>
+              
+
+        </div>
+
+
 
             <!-- <li data-toggle="collapse" data-target="#ventas">
                 <a><i class="fas fa-money-bill-wave"></i> Ventas Generales </a>
