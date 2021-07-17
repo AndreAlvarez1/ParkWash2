@@ -225,10 +225,15 @@ selectEstado(value:number){
       // console.log('i',i)
       // console.log('nombreArchivo', event.target.files[i].name)
       // console.log('nombreArchivo2', event.target.files[i].name.replace(/\s/g, ""))
-      this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name.replace(/\s/g, "")}`;
-      this.nombreArchivo = event.target.files[i].name.replace(/\s/g, "");
+
+      const nombreImagen = this.formatoTexto(event.target.files[i].name)
+
+      console.log('nombre Imagen', nombreImagen)
+
+      this.mensajeArchivo = `Archivo preparado: ${nombreImagen}`;
+      this.nombreArchivo = nombreImagen;
       this.datosFormulario.delete('archivo');
-      this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name.replace(/\s/g, ""))
+      this.datosFormulario.append('archivo', event.target.files[i], nombreImagen)
     }
   } else {
     this.mensajeArchivo = 'No hay un archivo seleccionado';
@@ -308,6 +313,51 @@ borrar(f:any){
 
 
 
+ formatoTexto(texto:string) {
+
+  let newText = texto
+
+  newText = newText.replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1")
+  newText = newText.replace(/\s/g, '')
+  newText = newText.replace(/%/gi, "")
+  newText = newText.normalize();
+
+  console.log('texto', newText, 'largo', newText.length);
+
+  if (texto.length > 7 ){
+    console.log('es largo')
+
+    let extension = '.jpg'
+
+    if (texto.match(/.(png)$/i)){
+      extension= '.png'
+    }
+    newText = newText.substring(0,7);
+    newText = newText + extension;
+    console.log('acortado', newText)
+
+  }
+
+  console.log('voy a devolver', newText)
+  
+  return newText
+
+  }
+
+
+
+
+
+  borrarLavado(){
+    this.wash.status = 0;
+    
+    this.conex.guardarDato('/post/wash/borrar', this.wash)
+    .subscribe( (resp:any) => { 
+      console.log('guardé', resp);
+      this.exito('Lavado guardado con éxito')
+        this.router.navigateByUrl('/team/washes');
+    });
+  }
 //  =============================================  //
 //  =============================================  //
 //  =============================================  //

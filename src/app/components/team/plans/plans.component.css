@@ -1,0 +1,33 @@
+.campo {
+    padding-top: 20px;
+}
+
+.mod {
+    color:white;
+}
+
+.tituloModal{
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.auto{
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.infoAuto{
+    background-color: #EAEAEA;
+}
+
+.infoAuto h1{
+font-size:1.2em;
+font-weight: 700;
+}
+
+.infoAuto p span{
+font-weight: 700;
+}
+
+.tarjetita{
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+}

@@ -74,7 +74,7 @@ export class WashesComponent implements OnInit {
     this.conex.getDatos(`/washes/${this.firstDay}/${this.lastDay}/${recintoId}`)
               .subscribe( (resp:any) => { 
                 console.log('washes', resp)
-                this.washesAll = resp['datos'];
+                this.washesAll = resp['datos'].filter( (was:any) => was.status != 0);
                 this.washes = this.washesAll;
                 this.loading = false;
               });

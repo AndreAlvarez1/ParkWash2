@@ -50,7 +50,7 @@ export class LavadosComponent implements OnInit {
     this.conex.getDatos(`/washesXuser/${this.firstDay}/${this.lastDay}/${this.user.id}`)
               .subscribe( (resp:any) => { 
                 console.log('washes', resp)
-                this.washesAll = resp['datos'];
+                this.washesAll = resp['datos'].filter( (was:any) => was.status != 0);
                 this.washes = this.washesAll;
                 this.loading = false;
               });

@@ -64,7 +64,7 @@ export class InicioComponent implements OnInit {
     this.conex.getDatos(`/washesXcar/${this.firstDay}/${this.lastDay}/${car}`)
               .subscribe( (resp:any) => { 
                 console.log('washes', resp)
-                const lavados = resp['datos'];
+                const lavados = resp['datos'].filter( (was:any) => was.status != 0);
                 for ( let l of lavados){
                   if (l.status > 0 && l.status < 3){
                     this.washes.push(l);

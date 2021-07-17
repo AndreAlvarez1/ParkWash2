@@ -141,14 +141,15 @@ export class UsersComponent implements OnInit {
       return;
     }
 
+    this.user.level = Number(this.user.level)
+
     console.log('guardaré usuario', this.user);
     this.conex.guardarDato('/post/usuarios/update', this.user)
-    .subscribe( resp => {
-      console.log('usuario guardado en bd', resp);
-      this.exito('Datos guardados con éxito');
-      this.modalUsuario = false;
-
-    });
+              .subscribe( (resp:any) => {
+                console.log('usuario guardado en bd', resp);
+                this.exito('Datos guardados con éxito');
+                this.modalUsuario = false;
+            },err =>{ console.log('error', err)});
   }
 
   formCliente(f: NgForm) {
@@ -188,7 +189,7 @@ export class UsersComponent implements OnInit {
     this.user.status = 0;
     this.conex.guardarDato('/post/usuarios/update', this.user)
               .subscribe( resp => {
-                console.log('usuario guardado en bd', resp);
+                console.log('usuario borrado en bd', resp);
                 this.exito('Usuario borrado con exito');
                 this.getUsers();
                 this.modalUsuario = false;

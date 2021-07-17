@@ -29,6 +29,9 @@ import { LavadoComponent } from './components/user/lavado/lavado.component';
 import { CardComponent } from './components/user/card/card.component';
 import { CardsComponent } from './components/user/cards/cards.component';
 import { UsersComponent } from './components/team/users/users.component';
+import { PlansComponent } from './components/team/plans/plans.component';
+import { CarsAdminComponent } from './components/team/cars-admin/cars-admin.component';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { UsersComponent } from './components/team/users/users.component';
     LavadoComponent,
     CardComponent,
     CardsComponent,
-    UsersComponent
+    UsersComponent,
+    PlansComponent,
+    CarsAdminComponent
     ],
   imports: [
     BrowserModule,
