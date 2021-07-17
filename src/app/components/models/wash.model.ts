@@ -8,6 +8,7 @@ export class WashModel {
     receipt: string;
     observation: string;
     washDate: string;
+    type: string;
     updateDate: string;
     reg_date: string;
 
@@ -23,6 +24,7 @@ export class WashModel {
     this.washDate = '';
     this.updateDate = '';
     this.reg_date = '';
+    this.type = 'Top Exterior'
    }
  }
  

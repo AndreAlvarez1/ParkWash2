@@ -49,7 +49,8 @@
         <div class="col-12 ">
             <h1>{{car.marca}} {{car.modelo}}</h1>
             <h2>Fecha Lavado: <span>{{wash.washDate | date: 'dd/MM'}}</span> a las <span>{{wash.washDate | date: 'hh:mm'}}</span></h2>
-            <p>{{car.patente}}</p>
+            <p>{{wash.type}} | {{car.patente}}</p>
+            
         </div>
     </div>
 

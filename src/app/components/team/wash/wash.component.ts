@@ -222,10 +222,13 @@ selectEstado(value:number){
  public cambioArchivo(event:any) {
   if (event.target.files.length > 0) {
     for (let i = 0; i < event.target.files.length; i++) {
-      this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
-      this.nombreArchivo = event.target.files[i].name;
+      // console.log('i',i)
+      // console.log('nombreArchivo', event.target.files[i].name)
+      // console.log('nombreArchivo2', event.target.files[i].name.replace(/\s/g, ""))
+      this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name.replace(/\s/g, "")}`;
+      this.nombreArchivo = event.target.files[i].name.replace(/\s/g, "");
       this.datosFormulario.delete('archivo');
-      this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name)
+      this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name.replace(/\s/g, ""))
     }
   } else {
     this.mensajeArchivo = 'No hay un archivo seleccionado';
