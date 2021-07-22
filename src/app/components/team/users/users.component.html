@@ -104,7 +104,8 @@
 
 
 <div *ngIf="modalUsuario === true" class="row fondoModif animated fadeIn" style="margin:0">
-    <div class="col-12 col-md-5 animated slideInLeft">
+  
+    <div class="col-12 col-md-5 animated slideInLeft mb-2">
          <div class="row f_calipso2 pad20 mod">
             <div class="col-10">
                 <h1>Editar Usuario</h1>
@@ -114,26 +115,28 @@
             </div>
         </div>
 
-        <div class="row pad20 f_blanco">
+        <div class="row pad20 f_blanco ">
+        <div class="col-12 modUser">
+
             <form (ngSubmit)="guardar(form)" #form="ngForm" class="row validate-form ">
-            
-            
+                
+                
                 <div class="col-12 campo">
                     <span *ngIf="form.submitted && form.controls['firstName'].errors" class="error">Debes ingresar un nombre</span>
                     <input class="form-control " type="text" name="firstName" required [(ngModel)]="user.firstName" placeholder="Nombre">
                 </div>
-    
+                
                 <div class="col-12 campo" data-validate="Password is required">
                     <span *ngIf="form.submitted && form.controls['lastName'].errors" class="error">Debes ingresar tu apellido por favor</span>
                     <input class="form-control" type="text" name="lastName" required minlength="2" [(ngModel)]="user.lastName" placeholder="Apellido">
                 </div>
                 
-    
+                
                 <div class="col-12 campo">
                     <span *ngIf="form.submitted && form.controls['cellphone'].errors" class="error">Debes ingresar un celular</span>
                     <input class="form-control" type="text" name="cellphone" required [(ngModel)]="user.cellphone" placeholder="+569 1111 1111">
                 </div>
-    
+                
                 <!-- <div class="col-12 campo">
                     <select class="form-control" [(ngModel)]="user.gender" [ngModelOptions]="{standalone: true}">
                         <option [value] = 'Masculino'>Masculino</option>
@@ -147,12 +150,12 @@
                     <span *ngIf="form.submitted && form.controls['rut'].errors" class="error">Debes ingresar tu rut</span>
                     <input class="form-control" type="text" name="rut" required [(ngModel)]="user.rut" placeholder="11.222.333-4">
                 </div>
-    
+                
                 <div class="col-12 campo">
                     <span *ngIf="form.submitted && form.controls['email'].errors" class="error">Debes ingresar un correo por favor</span>
                     <input class="form-control" type="email" name="email" required email [(ngModel)]="user.email" placeholder="Email">
                 </div>
-               
+                
                 <div class="col-12 campo">
                     <select class="form-control" [(ngModel)]="user.level" [ngModelOptions]="{standalone: true}">
                         <option [value] = 0 >Washer</option>
@@ -160,20 +163,21 @@
                         <option [value] = 2 >Admin</option>
                     </select>                   
                 </div>
-     
                 
-    
+                
+                
                 <div class="col-12">
                     <button class="btn btn-success btn-block" style="margin-bottom:10px" type="submit">
-                    Guardar
-                </button>
+                        Guardar
+                    </button>
                 </div>
-    
-            
+                
+                
             </form>
             <button class="btn btn-outline-danger btn-block" style="margin-bottom:10px" (click)="seguroBorrar()">
                 Borrar
             </button>
+        </div>
         </div>
 
    
@@ -181,7 +185,7 @@
     </div>
 
 
-    <div class="col-12 col-md-5 offset-md-2 animated slideInLeft">
+    <div class="col-12 col-md-5 offset-md-2 animated slideInRight">
         <div class="row f_calipso2 pad20 mod">
            <div class="col-10">
                <h1>Datos Cliente</h1>
@@ -191,8 +195,8 @@
            </div> -->
        </div>
 
-       <div class="row pad20 f_blanco">
-        <div class="col-12">
+       <div class="row pad20 f_blanco modUser pb-2">
+        <div class="col-12 ">
             <h1 class="tituloModal">Vehiculos</h1>
 
               <div *ngFor="let car of userCars; let i = index" class="accordion" >
@@ -215,8 +219,9 @@
                       <h2>Info</h2>
                       <p><span>Patente:</span> {{car.patente}}</p>
                       <p><span>Tipo:</span> {{car.tipo}}</p>
-                      <p><span>Color:</span> {{car.tipo}}</p>
+                      <p><span>Color:</span> {{car.color}}</p>
                       <p><span>Plan:</span> {{car.planName}}</p>
+                      <p><span>Descripción:</span> {{car.planDesc}}</p>
                       <p><span>Registrado el:</span> {{car.reg_date | date}}</p>
                       <p *ngIf="car.notToday === 2" ><span>No lavar:</span> Martes</p>
                       <p *ngIf="car.notToday === 3" ><span>No lavar:</span> Miércoles</p>
@@ -224,9 +229,7 @@
                       <p *ngIf="car.notToday === 9" > Sin Restricción de dia para lavado</p>
                   </div>
 
-
-
-
+  
                     </div>
                 </div>
 
@@ -251,20 +254,11 @@
         </div>
        </div>
 
-       <!-- color: "Gris Bufalo"
-id: 20
-marca: "Suzuki"
-modelo: "Vitara"
-notToday: 2
-patente: "LKVR84"
-planId: 3
-recintoId: 1
-reg_date: "2021-06-23T11:16:26.000Z"
-size: 2
-status: 1
-tipo: "SUV - Jeep"
-userId: 1 -->
-  
 
    </div>
+
+
+
+
+
 </div>

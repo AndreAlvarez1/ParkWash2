@@ -31,3 +31,8 @@ font-weight: 700;
 .tarjetita{
     border-bottom: 1px solid rgba(0,0,0,0.5);
 }
+
+.modUser{
+    max-height: 300px;
+    overflow: auto;
+}

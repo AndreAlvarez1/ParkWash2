@@ -106,7 +106,8 @@ export class UsersComponent implements OnInit {
                       const existePlan = this.plans.find( (pla:any) => pla.id === c.planId)
                       if (existePlan){
                         console.log('existe plan', existePlan)
-                        c.planName = existePlan.nombre
+                        c.planName = existePlan.name;
+                        c.planDesc = existePlan.description;
                       } else {
                         c.planName = 'pendiente'
 
