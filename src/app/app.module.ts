@@ -31,6 +31,7 @@ import { CardsComponent } from './components/user/cards/cards.component';
 import { UsersComponent } from './components/team/users/users.component';
 import { PlansComponent } from './components/team/plans/plans.component';
 import { CarsAdminComponent } from './components/team/cars-admin/cars-admin.component';
+import { DecardComponent } from './components/user/decard/decard.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { CarsAdminComponent } from './components/team/cars-admin/cars-admin.comp
     CardsComponent,
     UsersComponent,
     PlansComponent,
-    CarsAdminComponent
+    CarsAdminComponent,
+    DecardComponent
     ],
   imports: [
     BrowserModule,

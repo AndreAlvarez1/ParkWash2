@@ -1,0 +1,26 @@
+<p>decard works!</p>
+
+
+
+<form (ngSubmit)="decryptar(form)" #form="ngForm" class="row validate-form ">
+    <div class="col-10 offset-1 col-md-6 offset-md-3 campo">
+        <label>encriptado</label>
+        <input class="form-control" type="text" name="card"  [(ngModel)]="cardX" required  placeholder="xxxxxxxxxxxxx">
+    </div>
+ 
+    <div class="col-10 offset-1 col-md-6 offset-md-3 campo">
+        <label>Llabe</label>
+        <input class="form-control" type="text" name="code"  [(ngModel)]="code" required  placeholder="llave">
+    </div>
+
+    <div class="col-10 offset-1 col-md-6 offset-md-3 ">
+        <button class="btn btn-outline-light btn-block" style="margin-bottom:10px" type="submit">
+        decript
+    </button>
+    </div>
+
+
+
+</form>
+
+<p *ngIf="numbe != ''   " class="text-center">{{numbe}}</p>
