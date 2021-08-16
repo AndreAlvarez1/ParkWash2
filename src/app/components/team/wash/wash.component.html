@@ -55,7 +55,7 @@
                     <div class="row mt-2">
                         <div class="col-12">
                             <label>Fecha de lavado</label>
-                            <p (click)="editFecha = !editFecha" class="text-primary pointer">{{wash.washDate | date: 'dd/MM/yyyy' }}  {{wash.washDate | date: 'hh:mm' }} <i class="fas fa-pencil-alt"></i> </p>               
+                            <p (click)="editFecha = !editFecha" class="text-primary pointer">{{wash.washDate | date: 'dd/MM/yyyy' }}  {{wash.washDate | date: 'short' : 'GMT'}} <i class="fas fa-pencil-alt"></i> </p>               
                             <input *ngIf="editFecha" class="form-control" type="datetime-local" [(ngModel)]="wash.washDate" >
                         </div>
                     </div>

@@ -22,7 +22,7 @@
     "@angular/router": "~11.0.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^4.5.3",
-    "crypto-js": "^4.0.0",
+    "crypto-js": "^4.1.1",
     "firebase": "^8.2.10",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",

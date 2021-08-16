@@ -153,6 +153,10 @@ export class WashComponent implements OnInit {
   guardarLavado(tarea:string){
     console.log('guardar', this.wash);
     const dia = new Date(this.wash.washDate).getDay()
+    // const dia2 = dia.toLocaleTimeString();
+
+    console.log('washdate', this.wash.washDate);
+    console.log('dia', dia);
     // const notToday = new Date(this.wash.washDate).getDay()
     
     if (dia === this.car.notToday ){
@@ -170,8 +174,9 @@ export class WashComponent implements OnInit {
     if (this.wash.id > 0 && tarea !== 'borrar'){
       tarea = 'update'
     } 
+
     this.wash.updateDate = this.conex.formatoSQL(new Date());
-    console.log('update', this.wash);
+    console.log('guardo este lavado', this.wash);
     
     this.conex.guardarDato('/post/wash/' + tarea, this.wash)
               .subscribe( (resp:any) => { 

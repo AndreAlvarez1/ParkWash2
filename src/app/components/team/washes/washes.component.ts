@@ -39,10 +39,10 @@ export class WashesComponent implements OnInit {
 
 
   info(){
-    console.log('first', this.firstDay );
-    console.log('last', this.lastDay);
-    console.log('recintos', this.recintos);
-    console.log('recinto', this.recinto);
+    // console.log('first', this.firstDay );
+    // console.log('last', this.lastDay);
+    // console.log('recintos', this.recintos);
+    // console.log('recinto', this.recinto);
     console.log('washes all', this.washesAll);
     console.log('washes', this.washes);
   }

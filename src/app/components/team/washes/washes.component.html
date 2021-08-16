@@ -76,9 +76,6 @@
         </div>
     </div>
 
-
- 
-
     <div class="row">
         <div class="col-12 table-responsive">
             <table class="table table-striped table-hover">
@@ -98,7 +95,8 @@
                     <tr class="pointer" *ngFor="let w of washes | filter : { 'washerFirst' : searchString, 'washDate': searchString, 'marca': searchString, 'patente': searchString, 'recinto': searchString, 'description': searchString } : false ; index as i " (click)="selectWash(w)">
                         <td>{{ i + 1 }}</td>
                         <td>{{w.washerFirst}} {{w.washerLast}} </td>
-                        <td>{{w.washDate | date: 'dd/MM/yyyy' }}  {{w.washDate | date: 'hh:mm' }}</td>                    
+                        <td>{{w.washDate | date: 'dd/MM/yyyy' }}  {{w.washDate | date: 'HH:mm' : 'GMT'}}</td>                    
+                        <!-- <td>{{w.washDate | date: 'dd/MM/yyyy' }}  {{w.washDate | date: 'hh:mm' }}</td>                     -->
                         <td>{{w.marca}} {{w.modelo}} {{w.Tipo}}</td>
                         <td>{{w.patente}} </td>
                         <td>{{w.recinto}} </td>

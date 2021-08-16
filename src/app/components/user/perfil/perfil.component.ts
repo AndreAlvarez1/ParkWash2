@@ -326,7 +326,7 @@ getWashes(recintoId:any){
   this.conex.getDatos(`/washes/${this.firstDay}/${this.lastDay}/${recintoId}`)
             .subscribe( (resp:any) => { 
               const washesAll = resp['datos'];
-              this.washes = washesAll.filter( (w:any) => w.washerId === this.user.id);
+              this.washes = washesAll.filter( (w:any) => w.washerId === this.user.id && w.status != 0);
               console.log('washes', this.washes);
               this.loading = false;
             });
