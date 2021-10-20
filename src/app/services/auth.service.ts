@@ -23,7 +23,7 @@ export class AuthService {
 
 
   leerToken(): string {
-    if ( localStorage.getItem('idToken') ) {
+    if ( ('idToken') ) {
       this.userToken = localStorage.getItem('idToken');
     } else {
       this.userToken = '';

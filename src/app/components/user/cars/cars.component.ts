@@ -60,7 +60,7 @@ export class CarsComponent implements OnInit {
   }
 
   evaluarAgregar(){
-    if (this.cars.length < 1){
+    if (this.cars.length < 2){
       this.agregar = true;
       return;
     }

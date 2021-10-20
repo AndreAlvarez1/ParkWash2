@@ -20,12 +20,12 @@
   
 
         <div *ngIf="cars.length > 0" class="col-6 ">
-            <div class="row">
+            <div *ngFor="let c of cars" class="row">
                 <div class="col-2 text-right icono">
                     <i class="fas fa-car fa-4x"></i>
                 </div>
                 <div class="col-10">
-                    <div *ngFor="let c of cars" class="row auto">
+                    <div class="row auto">
                        <div class="col-12 text-left">
                            <h2>{{c.modelo}}</h2>
                            <p>Marca: {{c.marca}}</p>
@@ -86,6 +86,12 @@
         
         <div class="col-12">
             <h1>Planes</h1>
+
+            <select class="form-control" name="tipo"  (change)="selectCar($any($event.target).value)" >
+                <option *ngFor="let ca of cars" [value]="ca.id"> {{ca.marca}} {{ca.modelo}} </option>
+            </select> 
+            
+
             <p *ngIf="car.planId === 0"> Escoge un plan a tu medida</p>
             <p *ngIf="car.planId !== 0"> Planes disponibles</p>
         </div>

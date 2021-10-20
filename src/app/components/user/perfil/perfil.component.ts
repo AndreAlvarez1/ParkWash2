@@ -3,12 +3,12 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConectorService } from 'src/app/services/conector.service';
-import Swal from 'sweetalert2';
 import { CarModel } from '../../models/car.model';
 import { CardModel } from '../../models/card.model';
 import { PlanModel } from '../../models/plan.model';
 import { RecintoModel } from '../../models/recinto.model';
 import { UserModel } from '../../models/user.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil',
@@ -60,6 +60,7 @@ lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getM
   info(){
     // console.log('recintos', this.recintos);
     console.log('car', this.car);
+    console.log('cars', this.cars);
     console.log('plans', this.plans);
     const hoy = new Date();
 
@@ -215,7 +216,10 @@ lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getM
 //  =============================================  //
 
 
+
 getPlans(){
+  this.plans = [];
+
   this.conex.getDatos('/plans').subscribe( (resp:any) => {
     const all = resp['datos'].filter( (p:any) => p.recintoId === this.car.recintoId && p.status > 0)
     for (let p of all){
@@ -274,6 +278,13 @@ validarFecha(){
 
 }
 
+
+selectCar(value:any){
+  console.log('car', value)
+  this.car = this.cars.find( c => c.id == value);
+  this.getPlans();
+  console.log('este', this.car);
+}
 
 
 
