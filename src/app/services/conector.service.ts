@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class ConectorService {
 
 
-  // public url = 'http://localhost:9069';
-  public url = 'https://loyal-conduit-314919.ue.r.appspot.com/'
+  public url = 'http://localhost:9069';
+  // public url = 'https://loyal-conduit-314919.ue.r.appspot.com'
 
 
 
@@ -18,10 +18,14 @@ export class ConectorService {
 
 
   getDatos( ruta:string ) {
+    console.log('get ruta', this.url + ruta)
+
     return this.http.get( this.url + ruta );
  }
 
  guardarDato(ruta:string, body:any) {
+   console.log('post ruta', this.url + ruta)
+   console.log('body', body )
   return this.http.post( this.url + ruta, body );
 }
 

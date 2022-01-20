@@ -110,12 +110,12 @@ info(){
     this.plan.recintoId = Number(this.plan.recintoId);
     console.log('guardar plan', this.plan);
 
-    this.conex.guardarDato('/post/plans/' + tarea, this.plan)
+    this.conex.guardarDato(`/post/plans/${tarea}`, this.plan)
         .subscribe( (resp:any) => {
                   console.log('guardado con exito');
                  this.getPlans();
                  this.modalPlan = false;
-        },err =>{ console.log('error')})
+        },err =>{ console.log('error', err)})
   }
 
 
