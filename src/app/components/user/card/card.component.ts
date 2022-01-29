@@ -93,7 +93,14 @@ guardarCard(f:NgForm){
 
                 tarjeta.number = AES.encrypt(f.controls.card.value,key).toString();
                 this.grabarTarjeta(tarjeta);
-
+                
+                const body ={
+                  clientMail : 'tomas.sj@parkwash.cl',
+                  asunto: 'Nueva tarjeta',
+                  clientName: `${this.user.firstName} ${this.user.lastName}`,
+                  texto: `Se ha registrado una nueva tarjeta (${tarjeta.short}) para el cliente ${this.user.firstName} ${this.user.lastName} `
+              }
+              this.conex.sendMail(body);
               },err =>{ console.log('error', err)});
 
   console.log('guardo', f.controls.card.value);

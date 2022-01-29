@@ -119,7 +119,15 @@ export class CarsComponent implements OnInit {
               .subscribe( resp => {
                 console.log('guardado', resp);
                 this.getCars();
-
+                if (tarea == 'insert'){
+                  const body ={
+                    clientMail : 'tomas.sj@parkwash.cl',
+                    asunto: 'Nuevo Auto',
+                    clientName: `${this.user.firstName} ${this.user.lastName}`,
+                    texto: `Se ha registrado un ${this.car.marca} - ${this.car.modelo}, del cliente ${this.user.firstName} ${this.user.lastName} `
+                }
+                this.conex.sendMail(body);
+                }
               }, (err) => {
                 this.error(err.error.error.message)
               });

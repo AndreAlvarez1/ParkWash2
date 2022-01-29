@@ -147,7 +147,7 @@
 <div *ngIf="washes.length > 0" class="row pointer" >
     <div  *ngFor="let l of washes ; index as i"  class="col-10 offset-1 col-md-6 offset-md-3 lavado shadow" (click)="abrirLavado(l.id)">
         <h1>{{l.marca}} {{l.modelo}}</h1>
-        <p>Fecha Lavado: {{l.washDate | date: 'dd/MM/yyyy' }} a las {{l.washDate | date: 'HH:mm' : 'GMT'}}</p>
+        <p>Fecha Lavado: {{l.washDate | date: 'dd/MM/yyyy' : 'GMT' }} a las {{l.washDate | date: 'HH:mm' : 'GMT'}}</p>
         <p>{{l.recinto}}</p>
         <p>{{l.patente}} | {{l.tipo}} | {{l.color}}</p>
         <p>{{l.description}}</p>

@@ -45,4 +45,15 @@ formatoSQL(fecha:any){
   return newFecha;
 }
 
+
+
+sendMail(body:any){
+    this.guardarDato('/sendEmail', body)
+              .subscribe( (resp:any) => {
+                console.log('resp mail', resp);
+                }, err => { console.log('err', err)
+              });           
+}
+
+
 }

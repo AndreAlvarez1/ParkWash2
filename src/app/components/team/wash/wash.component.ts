@@ -40,6 +40,7 @@ export class WashComponent implements OnInit {
   modalAutos = false;
   editFecha = false;
 
+  cliente: UserModel = new UserModel();
     // SUBIR FOTO
   public archivoForm = new FormGroup({
     archivo: new FormControl(null, Validators.required),
@@ -136,11 +137,21 @@ export class WashComponent implements OnInit {
           if (this.id !== 'nuevo'){
             this.car = this.cars.find( (c:any) => c.id === this.wash.carId);
             console.log('this.car', this.car)
+            this.getClient(this.car.userId);
+          } else {
+            this.loading = false;
+            console.log('this.car2', this.car)
           }
-          this.loading = false;
-          console.log('this.car2', this.car)
 
         });
+  }
+
+
+  getClient(id:number){
+    this.conex.getDatos('/user/' + id).subscribe( (resp:any) => {
+      console.log('usuario', resp['datos']);
+      this.loading = false;
+    })
   }
 
   selectCar(car: any){
@@ -150,6 +161,8 @@ export class WashComponent implements OnInit {
     this.modalAutos = false;
   }
   
+
+
   guardarLavado(tarea:string){
     console.log('guardar', this.wash);
     const dia = new Date(this.wash.washDate).getDay()
@@ -185,8 +198,18 @@ export class WashComponent implements OnInit {
                 if (tarea === 'insert'){
                   this.router.navigateByUrl('/team/washes');
                 }
+                if (this.wash.status == 3){
+                  const body ={
+                      clientMail : this.client.email,
+                      asunto: 'Lavado completado',
+                      clientName: `${this.client.firstName} ${this.client.lastName}`,
+                      texto: `Hola ${this.client.firstName} ${this.client.lastName} el lavado de tu ${this.car.marca} - ${this.car.modelo} fue realizado con exito.`
+                  }
+                  this.conex.sendMail(body);
+                }
               });
   }
+
 
 
 //  =============================================  //

@@ -73,6 +73,16 @@ export class RegistroComponent implements OnInit {
               .subscribe( resp => {
                 console.log('usuario guardado en bd', resp);
                 this.exito('Datos guardados con éxito');
+
+              const body ={
+                  clientMail : 'tomas.sj@parkwash.cl',
+                  asunto: 'Nuevo Cliente',
+                  clientName: `${this.usuario.firstName} ${this.usuario.lastName}`,
+                  texto: `Se ha registrado ${this.usuario.firstName} ${this.usuario.lastName}`
+              }
+              this.conex.sendMail(body);
+
+
                 this.router.navigateByUrl('/logs/login');
               });
   }
