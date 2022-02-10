@@ -104,7 +104,9 @@ export class CarsComponent implements OnInit {
 
     if (this.car.tipo === 'Auto Hatchback' || this.car.tipo === 'Auto Sedán' ){
       this.car.size = 1;
-    } else {
+    } else if (this.car.tipo = 'SUV o Pick Grande') {
+      this.car.size = 3
+    }else {
       this.car.size = 2;
     }
     console.log('auto', this.car);

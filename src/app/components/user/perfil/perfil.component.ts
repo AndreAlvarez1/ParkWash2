@@ -142,6 +142,8 @@ lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getM
 
     if (this.car.tipo === 'Auto Hatchback' || this.car.tipo === 'Auto Sedán' ){
       this.car.size = 1;
+    } else if (this.car.tipo = 'SUV o Pick Grande') {
+      this.car.size = 3
     } else {
       this.car.size = 2;
     }

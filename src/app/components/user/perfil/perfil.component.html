@@ -102,6 +102,7 @@
                 <h3>{{plan.description}}</h3>
                 <p *ngIf="car.size === 1" >$ {{plan.price_normal_car | number }}</p>
                 <p *ngIf="car.size === 2" >$ {{plan.price_big_car | number }}</p>
+                <p *ngIf="car.size === 3" >$ {{plan.price_xl_car | number }}</p>
                 <button  *ngIf="plan.id !== car.planId" class="btn btn-primary text-center" (click)="choosePlan(plan)">Escoger este plan</button>
                 <button  *ngIf="plan.id === car.planId" class="btn btn-success text-center" >Este es tu plan</button>
             </div>

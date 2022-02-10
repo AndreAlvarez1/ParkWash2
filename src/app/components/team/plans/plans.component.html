@@ -46,6 +46,7 @@
                         <th>Recinto</th>
                         <th>Frecuencia Full Wash</th>
                         <th>Frecuencia Top Wash</th>
+                        <th>Precio Super Big Car</th>
                         <th>Precio Big Car</th>
                         <th>Precio Normal Car</th>
                     </tr>
@@ -58,6 +59,7 @@
                         <td>{{p.recintoName}} </td>
                         <td>{{p.frequency_full}}</td>                    
                         <td>{{p.frequency_top}}</td>
+                        <td>$ {{p.price_xl_car | number}}</td>
                         <td>$ {{p.price_big_car | number}}</td>
                         <td>$ {{p.price_normal_car | number}}</td>
                     </tr>
@@ -129,6 +131,12 @@
                     <input class="form-control" type="number" name="frequency_top" required [(ngModel)]="plan.frequency_top" placeholder="frequency_top">
                 </div>
     
+                <div class="col-6 campo">
+                    <label>Precio Super Big Car</label>
+                    <span *ngIf="form.submitted && form.controls['price_xl_car'].errors" class="error">Debes ingresar el precio super Big Car</span>
+                    <input class="form-control" type="number" name="price_xl_car" required [(ngModel)]="plan.price_xl_car" placeholder="price_xl_car">
+                </div>
+              
                 <div class="col-6 campo">
                     <label>Precio Big Car</label>
                     <span *ngIf="form.submitted && form.controls['price_big_car'].errors" class="error">Debes ingresar el precio Big Car</span>
