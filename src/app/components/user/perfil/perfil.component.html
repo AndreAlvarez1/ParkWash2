@@ -82,12 +82,11 @@
 
 
 
-    <div *ngIf="plans.length > 0 " class="row pad20">
+    <div  class="row pad20">
         
         <div class="col-12">
             <h1>Planes</h1>
-
-            <select class="form-control" name="tipo"  (change)="selectCar($any($event.target).value)" >
+            <select class="form-control" name="tipo" (change)="selectCar($any($event.target).value)" >
                 <option *ngFor="let ca of cars" [value]="ca.id"> {{ca.marca}} {{ca.modelo}} </option>
             </select> 
             
@@ -96,17 +95,23 @@
             <p *ngIf="car.planId !== 0"> Planes disponibles</p>
         </div>
 
-        <div *ngFor="let plan of plans" class="col-12 col-md-4">
-            <div [ngClass]="plan.id === car.planId ? 'selected': 'no' " class="plan shadow">
-                <h1>{{plan.name}}</h1>
-                <h3>{{plan.description}}</h3>
-                <p *ngIf="car.size === 1" >$ {{plan.price_normal_car | number }}</p>
-                <p *ngIf="car.size === 2" >$ {{plan.price_big_car | number }}</p>
-                <p *ngIf="car.size === 3" >$ {{plan.price_xl_car | number }}</p>
-                <button  *ngIf="plan.id !== car.planId" class="btn btn-primary text-center" (click)="choosePlan(plan)">Escoger este plan</button>
-                <button  *ngIf="plan.id === car.planId" class="btn btn-success text-center" >Este es tu plan</button>
+       <div *ngIf="plans.length > 0 " class="col-12">
+           <div class="row">
+            <div *ngFor="let plan of plans" class="col-12 col-md-4">
+                <div [ngClass]="plan.id === car.planId ? 'selected': 'no' " class="plan shadow">
+                    <h1>{{plan.name}}</h1>
+                    <h3>{{plan.description}}</h3>
+                    <p *ngIf="car.size === 1" >$ {{plan.price_normal_car | number }}</p>
+                    <p *ngIf="car.size === 2" >$ {{plan.price_big_car | number }}</p>
+                    <p *ngIf="car.size === 3" >$ {{plan.price_xl_car | number }}</p>
+                    <button  *ngIf="plan.id !== car.planId" class="btn btn-primary text-center" (click)="choosePlan(plan)">Escoger este plan</button>
+                    <button  *ngIf="plan.id === car.planId" class="btn btn-success text-center" >Este es tu plan</button>
+                </div>
             </div>
-        </div>
+
+           </div>
+       </div>
+      
     </div>
     
     <!--  -->

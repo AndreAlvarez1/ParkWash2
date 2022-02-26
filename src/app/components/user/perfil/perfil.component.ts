@@ -232,7 +232,7 @@ getPlans(){
 
 
     console.log('this.plans', this.plans);
-    console.log('car', this.car);
+    console.log('car post getplans', this.car);
     this.loading = false;
 
   });
@@ -283,9 +283,15 @@ validarFecha(){
 
 selectCar(value:any){
   console.log('car', value)
-  this.car = this.cars.find( c => c.id == value);
+  const id = Number(value);
+  console.log('car id', id)
+
+  const existe = this.cars.find( c => c.id === id);
+  this.car     = existe;
+
+  console.log('existe', existe);
+  console.log('este es el auto', this.car);
   this.getPlans();
-  console.log('este', this.car);
 }
 
 
