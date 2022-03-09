@@ -36,3 +36,20 @@ font-weight: 700;
     max-height: 300px;
     overflow: auto;
 }
+
+
+@media (min-width: 576px) {  }
+
+@media (min-width: 768px) { 
+    .modUser{
+        max-height: 600px;
+        overflow: auto;
+    }
+    
+ }
+
+@media (min-width: 992px) { }
+
+@media (min-width: 1200px) { }
+
+@media (min-width: 1400px) {  }

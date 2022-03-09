@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class ConectorService {
 
 
-  // public url = 'http://localhost:9069';
-  public url = 'https://loyal-conduit-314919.ue.r.appspot.com'
+  public url = 'http://localhost:9069';
+  // public url = 'https://loyal-conduit-314919.ue.r.appspot.com'
 
 
 
@@ -54,6 +54,11 @@ sendMail(body:any){
                 }, err => { console.log('err', err)
               });           
 }
+
+
+getFile(filename:string){
+  console.log('aca pido la foto', filename)
+  return this.url +'/getFile/' + filename}
 
 
 }

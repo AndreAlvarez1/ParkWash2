@@ -118,6 +118,8 @@
                 <div *ngFor="let i of antes" class="col-12">
                     <i class="fas fa-times text-danger fa-2x borrar" (click)="borrar(i)"></i>
                     <img [src]="i.url" class="fotoAuto">
+                    <!-- <img [src]="i.url" (error) ="onImgError($event)" class="fotoAuto "> -->
+
                 </div>
             </div>
             
@@ -140,6 +142,11 @@
 
                     <button [ngClass]="{'button': true, 'btn btn-primary btn-block': true, 'btn-warning': porcentaje > 0 && porcentaje < 100}" [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
                   </form>
+
+                  <!-- <input type="file" (input)="fileChoosen($event)">
+                  <button *ngIf="choosen" class="btn btn-primary" (click)="guardarfile('antes')">Subir</button>
+                  <i *ngIf="loadingSave" class="fas fa-spinner fa-spin"></i> -->
+                  
                 </div>
 
             </div>
@@ -156,21 +163,23 @@
 
             <div class="contenedor">
                 <div class="contenedor_formulario">
-                  <h5 class="subir">Subir foto despues</h5>
-                 
-                  <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo('despues')">
+                    <form [formGroup]="archivoForm" (ngSubmit)="subirArchivo('despues')">
                         <input class="form-control" type="file" formControlName="archivo" (change)="cambioArchivo($event)">
                         <span class="file-name">
-                          {{ mensajeArchivo }}
+                            {{ mensajeArchivo }}
                         </span>
-                    <hr>
-
+                        <hr>
+                        
                         <div *ngIf="porcentaje > 0 && porcentaje < 100" class="progress">
                             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" [style.width]="porcentaje + '%'" ></div>
-                         </div>
-
-                    <button [ngClass]="{'button': true, 'btn btn-primary btn-block': true, 'btn-warning': porcentaje > 0 && porcentaje < 100}" [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
-                  </form>
+                        </div>
+                        
+                        <button [ngClass]="{'button': true, 'btn btn-primary btn-block': true, 'btn-warning': porcentaje > 0 && porcentaje < 100}" [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>
+                    </form>
+                   
+                    <!-- <input type="file" (input)="fileChoosen($event)">
+                  <button *ngIf="choosen" class="btn btn-primary" (click)="guardarfile('despues')">Subir</button>
+                  <i *ngIf="loadingSave" class="fas fa-spinner fa-spin"></i> -->
                 </div>
 
               </div>

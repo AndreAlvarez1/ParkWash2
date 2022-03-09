@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ConectorService } from 'src/app/services/conector.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 
 import { CarModel } from '../../models/car.model';
@@ -10,6 +10,7 @@ import { UserModel } from '../../models/user.model';
 import { WashModel } from '../../models/wash.model';
 import Swal from 'sweetalert2';
 import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
+import { PhotoModel } from '../../models/photo.model';
 
 
 @Component({
@@ -19,28 +20,35 @@ import { FirebaseStorageService } from 'src/app/services/firebase-storage.servic
 })
 export class WashComponent implements OnInit {
   
-  loading = true;
-  loading2 = true;
-  searchString: string = '';
-
   id: any;
-  hoy = new Date().toLocaleString().slice(0, 19).replace('T', ' ');
+  uploadForm: FormGroup;  
+  file:any;
 
-  user: UserModel   = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
-  team: any[]       = [];
-  recintos: any[]   = [];
-  cars: any[]       = [];
-  antes: any[]       = [];
-  despues: any[]       = [];
+  loading               = true;
+  loading2              = true;
+  loadingSave           = false;
+  choosen               = false;
+  searchString: string  = '';
 
-  wash: WashModel = new WashModel();
-  car: CarModel = new CarModel();
-  client: UserModel = new UserModel();
+  hoy                   = new Date().toLocaleString().slice(0, 19).replace('T', ' ');
 
-  modalAutos = false;
-  editFecha = false;
+  user: UserModel       = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
+  team: any[]           = [];
+  recintos: any[]       = [];
+  cars: any[]           = [];
+  antes: any[]          = [];
+  despues: any[]        = [];
 
-  cliente: UserModel = new UserModel();
+  wash: WashModel       = new WashModel();
+  car: CarModel         = new CarModel();
+  client: UserModel     = new UserModel();
+  cliente: UserModel    = new UserModel();
+
+  modalAutos            = false;
+  editFecha             = false;
+
+
+  
     // SUBIR FOTO
   public archivoForm = new FormGroup({
     archivo: new FormControl(null, Validators.required),
@@ -53,12 +61,12 @@ export class WashComponent implements OnInit {
   public porcentaje = 0;
   public finalizado = false;
   public photo = '';
-  // public photo = 'https://firebasestorage.googleapis.com/v0/b/parkwash-fa1eb.appspot.com/o/monty.png?alt=media&token=db7c84ac-449e-4964-860d-ab9d1f97a634';
 
 
   constructor(private conex: ConectorService,
               private route: ActivatedRoute,
               private router: Router,
+              private formBuilder: FormBuilder,
               private firebaseStorage: FirebaseStorageService) { 
               this.id = this.route.snapshot.paramMap.get('id') || '';
               if (this.id === 'nuevo'){
@@ -66,9 +74,16 @@ export class WashComponent implements OnInit {
               }
 
               this.getFotos();
+
+              this.uploadForm = this.formBuilder.group({
+                profile: ['']
+              });
+
               }
 
   ngOnInit(): void {
+  
+
     this.getrecintos();
   }
 
@@ -236,6 +251,19 @@ selectEstado(value:number){
 }
 
 
+
+borrarLavado(){
+  this.wash.status = 0;
+  
+  this.conex.guardarDato('/post/wash/borrar', this.wash)
+  .subscribe( (resp:any) => { 
+    console.log('guardé', resp);
+    this.exito('Lavado guardado con éxito')
+      this.router.navigateByUrl('/team/washes');
+  });
+}
+
+
 //  =============================================  //
 //  =============================================  //
 //  =============================================  //
@@ -244,16 +272,35 @@ selectEstado(value:number){
 //  =============================================  //
 //  =============================================  //
 
+getFotos(){
+  this.antes = [];
+  this.despues = [];
+  if (this.id === 'nuevo'){
+    return;
+  }
+  this.loading2 = true;
+  this.conex.getDatos('/photos/' + this.id)
+            .subscribe( (resp:any) => { 
+                        console.log('fotos', resp);
+                        const fotos = resp['datos'];  
+                        for (let f of fotos){
+                          f.url = this.conex.getFile(f.filename);
+                          if (f.tipo === 'antes' && f.status > 0){
+                            this.antes.push(f)
+                          } else if(f.tipo === 'despues' && f.status > 0){
+                            this.despues.push(f)
+                          }
+                        }
+                        this.loading2 = false;
+                      });
+}
 
 
- //Evento que se gatilla cuando el input de tipo archivo cambia
+
+//  Evento que se gatilla cuando el input de tipo archivo cambia
  public cambioArchivo(event:any) {
   if (event.target.files.length > 0) {
     for (let i = 0; i < event.target.files.length; i++) {
-      // console.log('i',i)
-      // console.log('nombreArchivo', event.target.files[i].name)
-      // console.log('nombreArchivo2', event.target.files[i].name.replace(/\s/g, ""))
-
       const nombreImagen = this.formatoTexto(event.target.files[i].name)
 
       console.log('nombre Imagen', nombreImagen)
@@ -268,7 +315,7 @@ selectEstado(value:number){
   }
 }
 
-//Sube el archivo a Cloud Storage
+// Sube el archivo a Cloud Storage
 public subirArchivo(tipo:string) {
   let archivo = this.datosFormulario.get('archivo');
   let referencia = this.firebaseStorage.referenciaCloudStorage(this.nombreArchivo);
@@ -306,27 +353,8 @@ guardarFoto(type:string, urlPhoto:string){
               });
 }
 
-getFotos(){
-  this.antes = [];
-  this.despues = [];
-  if (this.id === 'nuevo'){
-    return;
-  }
-  this.loading2 = true;
-  this.conex.getDatos('/photos/' + this.id)
-            .subscribe( (resp:any) => { 
-                        console.log('fotos', resp);
-                        const fotos = resp['datos'];  
-                        for (let f of fotos){
-                          if (f.tipo === 'antes' && f.status > 0){
-                            this.antes.push(f)
-                          } else if(f.tipo === 'despues' && f.status > 0){
-                            this.despues.push(f)
-                          }
-                        }
-                        this.loading2 = false;
-                      });
-}
+
+
 
 borrar(f:any){
   console.log('foto',f);
@@ -373,19 +401,110 @@ borrar(f:any){
   }
 
 
+// fileChoosen(event:any){
+//   if (event.target.value){
+//     this.file    = <File>event.target.files[0];
+//     console.log('file', this.file);
+
+//     if (this.file.size > 20728640){
+//       this.error('El archivo pesa más de 10mb');
+//       return;
+//     } 
+      
+//     this.uploadForm.get('profile').setValue(this.file);
+
+//     this.choosen = true;
 
 
 
-  borrarLavado(){
-    this.wash.status = 0;
+//   }
+// }
+
+
+
+  
+
+// guardarfile(tipo:string){
+//   this.loadingSave = true;
+//   const formData   = new FormData();
+//   formData.append('profile', this.uploadForm.get('profile').value);
+//   this.conex.guardarDato('/single',  formData)
+//             .subscribe( resp => { 
+//               console.log('guarde archivo', resp);
+//               this.guardarBd(resp, tipo);
+//             }, err =>{
+//               console.log('error', err);
+//             });
+
+// }
+
+
+
+
+//   guardarBd(file:any, tipo:string){
+//     console.log('file', file)
+//     let photo = new PhotoModel();
+//     photo.filename   = file.filename;
+//     photo.washId     = this.id;
+//     photo.url        = '';
+//     photo.tipo       = tipo;
+//     photo.status     = 1;
+
+//     this.conex.guardarDato('/post/photos/insert', photo)
+//               .subscribe ( resp => { 
+//                   console.log('guaré en bd', resp);
+//                   this.loadingSave = false
+//                   this.getFotos();
+
+//                 })
+//   }
+
+
+
+
+
+//   deleteFile(a:any){
+//     console.log('delete a', a);
+//     this.conex.getDatos('/deleteFile/' + a.filename)
+//               .subscribe( resp => { 
+//                 console.log('borré archivo', resp);
+//               }, err =>{
+//                 if (err.status != 200){
+//                   console.log('error', err);
+//                   return;
+//                 }
+//                 this.deleteFileBd(a);
+//               });
+//   }
+
+
+
+
+//   deleteFileBd(a:any){
+//     console.log('delete a', a);
+
+//     this.conex.guardarDato('/post/photos/borrar' , a)
+//               .subscribe ( resp => {
+//                 console.log('resp borrado ', resp);
+//                 Swal.fire(
+//                   'Borrado!',
+//                   'El archivo fue eliminado.',
+//                   'success'
+//                 )
+//                 this.getFotos();
+//               })
+
     
-    this.conex.guardarDato('/post/wash/borrar', this.wash)
-    .subscribe( (resp:any) => { 
-      console.log('guardé', resp);
-      this.exito('Lavado guardado con éxito')
-        this.router.navigateByUrl('/team/washes');
-    });
-  }
+//   }
+
+//   onImgError(event:any) { 
+//     // event.target.src = 'assets/images/sinimagen.png';
+//     console.log('error foto', event)
+// }
+
+
+
+
 //  =============================================  //
 //  =============================================  //
 //  =============================================  //

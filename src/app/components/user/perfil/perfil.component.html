@@ -14,12 +14,12 @@
     
     <div  class="row cars text-center shadow" style="padding:20px">
        
-        <div *ngIf="cars.length < 1" class="col-6">
+        <div *ngIf="cars.length < 1" class="col-12 ">
             <p>Aún no has registrado ningún vehiculo</p>
         </div>
   
 
-        <div *ngIf="cars.length > 0" class="col-6 ">
+        <div *ngIf="cars.length > 0" class="col-12 col-md-6 ">
             <div *ngFor="let c of cars" class="row">
                 <div class="col-2 text-right icono">
                     <i class="fas fa-car fa-4x"></i>
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div *ngIf="cards.length > 0" class="col-6 ">
+        <div *ngIf="cards.length > 0" class="col-12 col-md-6 ">
             <div class="row">
                 <div class="col-2 text-right icono">
                     <i class="far fa-credit-card fa-4x"></i>
