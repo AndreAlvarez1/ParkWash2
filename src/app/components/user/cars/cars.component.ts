@@ -13,19 +13,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cars.component.css']
 })
 export class CarsComponent implements OnInit {
-  loading = true;
-  user: UserModel = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
-  recintos: any[] = [];
-  cars: any[] = [];
-  car: CarModel = new CarModel();
-  modalVehiculo = false;
+  loading               = true;
+  user: UserModel       = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
+  recintos: any[]       = [];
+  cars: any[]           = [];
+  car: CarModel         = new CarModel();
+  modalVehiculo         = false;
   recinto: RecintoModel = new RecintoModel();
-  agregar = false;
-  update = false;
+  agregar               = false;
+  update                = false;
 
-  week = [ {id:2, day: 'Martes'},{id:3, day: 'Miércoles'},{id:5, day: 'Viernes'},{id:9, day: 'No, pueden lavar cualquier día de la semana'},]
+  week = [ {id:1, day:'Lunes'},{id:2, day: 'Martes'},{id:3, day: 'Miércoles'},{id:4, day: 'Jueves'},{id:5, day: 'Viernes'},{id:9, day: 'Cualquier día de la semana'},]
 
-
+  
   constructor(private conex: ConectorService) { 
       console.log('cars', this.cars);
       this.getCars();
@@ -102,12 +102,12 @@ export class CarsComponent implements OnInit {
     this.car.userId = this.user.id;
     this.loading = true;
 
-    if (this.car.tipo === 'Auto Hatchback' || this.car.tipo === 'Auto Sedán' ){
+    if (this.car.tipo === "Normal (hatchback, sedán chico)" ){
       this.car.size = 1;
-    } else if (this.car.tipo = 'SUV o Pick Grande') {
-      this.car.size = 3
+    } else if (this.car.tipo == "Grande (sedán grande, SUV, camionetas)" ) {
+      this.car.size = 2
     }else {
-      this.car.size = 2;
+      this.car.size = 3;
     }
     console.log('auto', this.car);
 

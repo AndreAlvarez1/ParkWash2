@@ -32,6 +32,7 @@ import { UsersComponent } from './components/team/users/users.component';
 import { PlansComponent } from './components/team/plans/plans.component';
 import { CarsAdminComponent } from './components/team/cars-admin/cars-admin.component';
 import { DecardComponent } from './components/user/decard/decard.component';
+import { RecintosComponent } from './components/team/recintos/recintos.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { DecardComponent } from './components/user/decard/decard.component';
     UsersComponent,
     PlansComponent,
     CarsAdminComponent,
-    DecardComponent
+    DecardComponent,
+    RecintosComponent
     ],
   imports: [
     BrowserModule,

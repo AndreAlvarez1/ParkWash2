@@ -16,26 +16,26 @@ import Swal from 'sweetalert2';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-  loading = true;
-  recintos: any[] = [];
-  cars: any[] = [];
-  car: CarModel = new CarModel();
-  plans: any[] = [];
+  loading               = true;
+  recintos: any[]       = [];
+  cars: any[]           = [];
+  car: CarModel         = new CarModel();
+  plans: any[]          = [];
   
-  user: UserModel = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
+  user: UserModel       = JSON.parse( localStorage.getItem('pkUser')|| '{}') ;
 
-  modalVehiculo = false;
+  modalVehiculo         = false;
   recinto: RecintoModel = new RecintoModel();
-  agregar = false;
-  update = false;
-  washes: any[] = [];
+  agregar               = false;
+  update                = false;
+  washes: any[]         = [];
 
-  cards: any[] = [];
-  card: CardModel = new CardModel();
+  cards: any[]          = [];
+  card: CardModel       = new CardModel();
 
-date = new Date();
-firstDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth(), 1));
-lastDay = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth() + 2, 0));
+date                    = new Date();
+firstDay                = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth(), 1));
+lastDay                 = this.conex.formatoSQL(new Date(this.date.getFullYear(), this.date.getMonth() + 2, 0));
 
 
   constructor(private auth:AuthService,
@@ -227,6 +227,10 @@ getPlans(){
     for (let p of all){
       let plan = new PlanModel();
       plan = p;
+      if (p.discount > 0){
+        plan.porcentaje = ( (100 - p.discount) * 0.01);
+      };
+
       this.plans.push(plan);
     }
 

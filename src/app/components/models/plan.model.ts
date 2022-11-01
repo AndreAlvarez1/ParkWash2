@@ -8,6 +8,8 @@ export class PlanModel {
     price_big_car: number;	
     frequency_top: number;	
     frequency_full: number;	
+    discount: number;	
+    porcentaje: number;	
     status: number;	
     created_at: string;	
 
@@ -21,6 +23,8 @@ export class PlanModel {
     this.price_big_car      = 0;
     this.frequency_top      = 0;
     this.frequency_full     = 0;	
+    this.discount           = 0;	
+    this.porcentaje         = 0;	
     this.status             = 0;	
     this.created_at         = '';	
    }

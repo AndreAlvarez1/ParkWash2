@@ -51,6 +51,7 @@
 
         </div>
           
+        <!-- ADMINS -->
         <div *ngIf="user.level === 2">
 
               <li routerLink="/team/users">
@@ -68,7 +69,11 @@
                     <i class="far fa-file-alt"></i> Planes
                 </a>
             </li>
-              
+            <li routerLink="/team/recintos">
+                <a class="nav-link" routerLink="/team/recintos">
+                    <i class="fas fa-building"></i> Recintos
+                </a>
+            </li>
 
         </div>
 

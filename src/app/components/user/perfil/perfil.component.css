@@ -69,3 +69,15 @@
 .lavado p {
     margin-bottom: 0;
 }
+
+.tachado{
+    color:red;
+    font-weight: 100;
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+.promo{
+    color:green;
+    font-weight: 700;
+}

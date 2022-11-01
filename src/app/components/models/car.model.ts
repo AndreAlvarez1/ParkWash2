@@ -16,6 +16,7 @@ export class CarModel {
     lastName: string;
     description: string;
     notToday: number;
+    washDay: number;
 
 
    constructor() {
@@ -35,6 +36,7 @@ export class CarModel {
     this.lastName = '';
     this.description = '' ;
     this.notToday = 9 ;
+    this.washDay = 9 ;
 
    }
 

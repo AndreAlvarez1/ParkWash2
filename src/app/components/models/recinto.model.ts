@@ -13,7 +13,7 @@ export class RecintoModel {
    this.direccion = '';
    this.lat = 0;
    this.lng = 0;
-   this.status = 0;
+   this.status = 1;
    this.reg_date = '';
   }
 }

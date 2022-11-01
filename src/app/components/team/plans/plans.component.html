@@ -4,7 +4,7 @@
 
 <div *ngIf="!loading" class="contenedor2">
 
-    <div class="row encabezado f_gris pad20">
+    <div class="row encabezado f_gris pad20" style="margin:0">
         <div class="col-6">
             <h1 (click)="info()">Planes</h1>
         </div>
@@ -18,7 +18,7 @@
 
 
 
-    <div class="row bg-light pad20">
+    <div class="row bg-light pad20" style="margin:0">
         <div class="col-12 col-md-6">
             <label><i class="fas fa-search"></i> Buscador</label>
             <input type="text" class="form-control" name="searchString" placeholder="Buscador..." [(ngModel)]="searchString" />
@@ -35,7 +35,7 @@
 
  
 
-    <div class="row">
+    <div class="row" style="margin:0">
         <div class="col-12 table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="thead-dark">
@@ -44,11 +44,11 @@
                         <th>Nombre</th>
                         <th>Desripción</th>
                         <th>Recinto</th>
-                        <th>Frecuencia Full Wash</th>
-                        <th>Frecuencia Top Wash</th>
-                        <th>Precio Super Big Car</th>
-                        <th>Precio Big Car</th>
-                        <th>Precio Normal Car</th>
+                        <th>Frecuencia Full</th>
+                        <th>Frecuencia Exterior</th>
+                        <th>Normal</th>
+                        <th>Grande</th>
+                        <th>Super grande</th>
                     </tr>
                 </thead>
                 <tbody *ngIf="plans.length > 0" class="animated fadeIn">
@@ -59,9 +59,9 @@
                         <td>{{p.recintoName}} </td>
                         <td>{{p.frequency_full}}</td>                    
                         <td>{{p.frequency_top}}</td>
-                        <td>$ {{p.price_xl_car | number}}</td>
-                        <td>$ {{p.price_big_car | number}}</td>
                         <td>$ {{p.price_normal_car | number}}</td>
+                        <td>$ {{p.price_big_car | number}}</td>
+                        <td>$ {{p.price_xl_car | number}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -147,6 +147,11 @@
                     <label>Precio Normal Car</label>
                     <span *ngIf="form.submitted && form.controls['price_normal_car'].errors" class="error">Debes ingresar el precio price_normal_car</span>
                     <input class="form-control" type="number" name="price_normal_car" required [(ngModel)]="plan.price_normal_car" placeholder="price_normal_car">
+                </div>
+            
+                <div class="col-6 campo">
+                    <label>Descuento</label>
+                    <input class="form-control" type="number" name="discount" required [(ngModel)]="plan.discount" placeholder="discount">
                 </div>
 
                                 

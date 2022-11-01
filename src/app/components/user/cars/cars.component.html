@@ -99,11 +99,9 @@
                     <div class="col-12 campo">
                         <label>Tipo de Vehiculo</label>
                         <select class="form-control" [(ngModel)]="car.tipo" [ngModelOptions]="{standalone: true}">
-                            <option>Auto Hatchback</option>
-                            <option>Auto Sedán Chico</option>
-                            <option>Camioneta Pick-up</option>
-                            <option>SUV - Jeep</option>
-                            <option>SUV o Pick Grande</option>
+                            <option>Normal (hatchback, sedán chico)</option>
+                            <option>Grande (sedán grande, SUV, camionetas)</option>
+                            <option>Super Grande (SUV XL, Camionetas XL)</option>
                         </select>   
                     </div>
                 
@@ -116,8 +114,8 @@
                     </div>
 
                     <div class="col-12 mb-3">
-                        <label>¿Hay algún día de estos que no puedas dejar el auto para que te lo lavemos?</label>
-                        <select class="form-control" [(ngModel)]="car.notToday" [ngModelOptions]="{standalone: true}" (change)="selectDia($any($event.target).value)" >
+                        <label>¿Que día prefieres que lavemos tu auto??</label>
+                        <select class="form-control" [(ngModel)]="car.washDay" [ngModelOptions]="{standalone: true}" (change)="selectDia($any($event.target).value)" >
                             <option *ngFor="let w of week" [value]='w.id'>{{w.day}}</option>
                         </select>   
                     </div>

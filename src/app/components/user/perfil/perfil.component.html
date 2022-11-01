@@ -101,9 +101,19 @@
                 <div [ngClass]="plan.id === car.planId ? 'selected': 'no' " class="plan shadow">
                     <h1>{{plan.name}}</h1>
                     <h3>{{plan.description}}</h3>
-                    <p *ngIf="car.size === 1" >$ {{plan.price_normal_car | number }}</p>
-                    <p *ngIf="car.size === 2" >$ {{plan.price_big_car | number }}</p>
-                    <p *ngIf="car.size === 3" >$ {{plan.price_xl_car | number }}</p>
+                    <div *ngIf="plan.discount == 0">
+                        <p *ngIf="car.size === 1" >$ {{plan.price_normal_car | number }}</p>
+                        <p *ngIf="car.size === 2" >$ {{plan.price_big_car | number }}</p>
+                        <p *ngIf="car.size === 3" >$ {{plan.price_xl_car | number }}</p>
+                    </div>
+                
+                    <div *ngIf="plan.discount > 0">
+                        <p *ngIf="car.size === 1" class="promo"><span class="tachado">$ {{plan.price_normal_car | number }}</span> ${{plan.price_normal_car * plan.porcentaje | number}}</p>
+                        <p *ngIf="car.size === 2" class="promo"><span class="tachado">$ {{plan.price_big_car | number }}</span> ${{plan.price_big_car * plan.porcentaje | number}}</p>
+                        <p *ngIf="car.size === 3" class="promo"><span class="tachado">$ {{plan.price_xl_car | number }}</span> ${{plan.price_xl_car * plan.porcentaje | number}}</p>
+                    </div> 
+
+
                     <button  *ngIf="plan.id !== car.planId" class="btn btn-primary text-center" (click)="choosePlan(plan)">Escoger este plan</button>
                     <button  *ngIf="plan.id === car.planId" class="btn btn-success text-center" >Este es tu plan</button>
                 </div>
